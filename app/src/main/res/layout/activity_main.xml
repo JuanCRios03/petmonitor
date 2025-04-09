@@ -1,49 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#FFFFFF"
-    android:padding="24dp">
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvBienvenida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="¡Bienvenido de nuevo!"
-        android:textColor="#000000"
-        android:textSize="60sp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/imgMascotas"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp" />
-
-
-    <Button
-        android:id="@+id/btnIniciarSesion"
+    <LinearLayout
+        android:id="@+id/centeredLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Iniciar sesión"
-        android:textSize="35sp"
-        android:backgroundTint="#3DF28C"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="16dp"
-        android:padding="14dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/btnRegistrarme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registrarme"
-        android:textSize="35sp"
-        android:backgroundTint="#59D6F5"
-        android:textColor="#FFFFFF"
-        android:padding="14dp" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/txtBienvenida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido"
+            android:fontFamily="@font/titulos"
+            android:textSize="60sp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText"/>
+
+        <TextView
+            android:id="@+id/de_nuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="de nuevo!"
+            android:fontFamily="@font/titulos"
+            android:textSize="60sp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="-80dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/home_img"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_img"
+            app:shapeAppearanceOverlay="@style/RoundedImageViewStyle"
+            android:layout_marginTop="-30dp"/>
+
+        <Button
+            android:id="@+id/btnIniciarSesion"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:text="Iniciar sesion"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/greenButton"
+            android:layout_marginTop="30dp"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnRegistrarme"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:text="Registrarme"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/blueButton"
+            android:layout_marginTop="5dp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

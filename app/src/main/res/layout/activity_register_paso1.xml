@@ -51,64 +51,91 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Cuál es tu nombre"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:fontFamily="@font/titulos"
             android:layout_marginBottom="4dp"
-            android:text="¿Cuál es tu nombre?"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            tools:ignore="HardcodedText"  />
 
         <EditText
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Bryan, Juan"
-            android:backgroundTint="#3DF28C"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:textColorHint="@color/grayHint"
+            android:fontFamily="@font/titulos"
             android:inputType="textPersonName"
-            android:layout_marginBottom="16dp" />
+            android:background="@drawable/rounded_edittext"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Cuál es tu apellido?"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginBottom="4dp" />
+            android:text="Cuál es tu apellido"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText" />
 
         <EditText
             android:id="@+id/etApellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ríos, Contreras"
-            android:backgroundTint="#3DF28C"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:textColorHint="@color/grayHint"
+            android:fontFamily="@font/titulos"
             android:inputType="textPersonName"
-            android:layout_marginBottom="16dp" />
+            android:background="@drawable/rounded_edittext"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Cuál es tu gmail?"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginBottom="4dp" />
+            android:text="Cuál es tu gmail"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText"  />
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ejemplo@gmail.com"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:textColorHint="@color/grayHint"
+            android:fontFamily="@font/titulos"
             android:inputType="textEmailAddress"
-            android:backgroundTint="#3DF28C"
-            android:layout_marginBottom="32dp" />
+            android:background="@drawable/rounded_edittext"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnSiguiente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#3DF28C"
-            android:padding="12dp"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
             android:text="Siguiente"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/greenButton"
+            android:layout_marginTop="30dp"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 </ScrollView>

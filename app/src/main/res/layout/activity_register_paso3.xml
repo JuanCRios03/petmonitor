@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFFFFF"
     android:padding="20dp">
 
@@ -14,11 +15,12 @@
 
         <TextView
             android:text="Cuentanos sobre tu"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/titulos"
             android:textColor="#000000"
+            android:textSize="35sp"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="left"
+            tools:ignore="HardcodedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -26,9 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mascota"
+            android:fontFamily="@font/titulos"
+            android:layout_gravity="left"
             android:textColor="#222222"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            android:textSize="50sp"
+            android:layout_marginTop="-40dp"
+            tools:ignore="HardcodedText" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/home_img"
@@ -39,81 +44,113 @@
             app:shapeAppearanceOverlay="@style/RoundedImageViewStyle" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Cual es su nombre"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="left"
             android:textColor="#000000"
             android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText"   />
 
         <EditText
             android:id="@+id/etNombreMascota"
-            android:hint="Milo, Max, Princesa"
-            android:drawableEnd="@drawable/ic_arrow_dropdown"
-            android:textColorHint="#00FFA3"
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Milo, Max, Princesa"
+            android:fontFamily="@font/titulos"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/grayHint"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Cual es su especie"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="left"
             android:textColor="#000000"
             android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText"   />
 
         <EditText
             android:id="@+id/etEspecie"
-            android:hint="Perro, Gato, etc."
-            android:drawableEnd="@drawable/ic_arrow_dropdown"
-            android:textColorHint="#00FFA3"
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Perro, gato"
+            android:fontFamily="@font/titulos"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/grayHint"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Cual es su raza"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="left"
             android:textColor="#000000"
             android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText"   />
 
         <EditText
             android:id="@+id/etRaza"
-            android:hint="Samoyedo, Husky"
-            android:drawableEnd="@drawable/ic_arrow_dropdown"
-            android:textColorHint="#00FFA3"
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Samoyedo, Husky"
+            android:fontFamily="@font/titulos"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/grayHint"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Cual es su peso"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="left"
             android:textColor="#000000"
             android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText"   />
 
         <EditText
             android:id="@+id/etPeso"
-            android:hint="30 kg"
-            android:drawableEnd="@drawable/ic_arrow_dropdown"
-            android:textColorHint="#00FFA3"
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="30 kg"
+            android:fontFamily="@font/titulos"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/grayHint"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
         <Button
             android:id="@+id/btnGuardarMascota"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
             android:text="Seguir"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/greenButton"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#00FF88"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 </ScrollView>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,8 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cual es su edad"
-        android:textSize="27sp"
-        android:textColor="#000000" />
+        android:layout_gravity="left"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:fontFamily="@font/titulos"
+        android:layout_marginBottom="4dp"
+        tools:ignore="HardcodedText"   />
 
     <EditText
         android:id="@+id/spinnerEdad"
@@ -20,30 +25,35 @@
         android:layout_height="50dp"
         android:background="@drawable/rounded_edittext"
         android:hint="5 años"
+        android:fontFamily="@font/titulos"
         android:drawableEnd="@drawable/ic_arrow_dropdown"
         android:paddingHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:textColorHint="#00FFA3"
-        android:textColor="#000000" />
+        android:textColorHint="@color/grayHint"
+        android:textColor="#000000"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btnAgregarEdad"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="320dp"
+        android:layout_height="80dp"
         android:text="Agregar"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        android:backgroundTint="#00FFA3"
-        android:layout_marginBottom="16dp" />
+        android:fontFamily="@font/titulos"
+        android:textSize="30sp"
+        android:backgroundTint="@color/greenButton"
+        android:layout_marginTop="20dp"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btnCancelar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="320dp"
+        android:layout_height="80dp"
         android:text="Cancelar"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        android:backgroundTint="#FF6B6B" />
+        android:fontFamily="@font/titulos"
+        android:textSize="30sp"
+        android:backgroundTint="@color/redButton"
+        android:layout_marginTop="5dp"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>
 
