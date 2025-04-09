@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="24dp"
+    android:gravity="top|center_horizontal">
+
+    <!-- Título principal -->
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continuemos"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingresa una contrasena"
+        android:textSize="27sp"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPassword"
+        android:hint="contraseña"
+        android:drawableEnd="@drawable/ic_arrow_dropdown"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColorHint="#00FFA3"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repite la contrasena"
+        android:textSize="27sp"
+        android:textColor="#000000" />
+
+    <!-- Input repetir contraseña -->
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPassword"
+        android:hint="repetir contrasñea"
+        android:drawableEnd="@drawable/ic_arrow_dropdown"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="32dp"
+        android:textColorHint="#00FFA3"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btnFinalizarRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Registrarme"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:backgroundTint="#00FFA3"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Volver"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:backgroundTint="#FF6B6B" />
+
+</LinearLayout>
+
+
+

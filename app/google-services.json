@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150240239222",
+    "project_id": "petmonitor-77598",
+    "storage_bucket": "petmonitor-77598.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150240239222:android:d6afc843b6c970f9598957",
+        "android_client_info": {
+          "package_name": "co.edu.unipiloto.petmonitor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtTxv9gPWL6VKWTTvta2bVz4L9wnRz_1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

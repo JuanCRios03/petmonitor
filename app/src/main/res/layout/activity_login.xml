@@ -1,0 +1,103 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inicia sesión"
+        android:textColor="#000000"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Imagen -->
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Texto de "Cual es tu gmail" -->
+    <TextView
+        android:id="@+id/tvGmailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cual es tu gmail"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Campo de correo -->
+    <EditText
+        android:id="@+id/etGmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ejemplo@gmail.com"
+        android:drawableEnd="@drawable/ic_arrow_dropdown"
+        android:textColorHint="#00FFA3"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/rounded_edittext"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="#000000" />
+
+    <!-- Texto de "Ingresa tu contraseña" -->
+    <TextView
+        android:id="@+id/tvPasswordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingresa tu contraseña"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Campo de contraseña -->
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escribe aqui tu contraseña"
+        android:drawableEnd="@drawable/ic_arrow_dropdown"
+        android:textColorHint="#00FFA3"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edittext"
+        android:padding="12dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="#000000" />
+
+    <!-- Botón Iniciar -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar"
+        android:backgroundTint="#00FF9A"
+        android:padding="20dp"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold" />
+
+    <!-- Botón Volver -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:backgroundTint="#FF4C4C"
+        android:textSize="40sp"
+        android:padding="20dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+</LinearLayout>
+
