@@ -48,4 +48,5 @@ dependencies {
     //implementation("com.google.firebase:firebase-firestore:24.1.0")
     implementation("com.google.firebase:firebase-storage:21.0.0")
     implementation("com.google.firebase:firebase-database:20.1.0")
+    implementation("com.google.android.material:material:1.11.0")
 }
