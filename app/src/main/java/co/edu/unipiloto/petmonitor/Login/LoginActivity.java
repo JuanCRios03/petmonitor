@@ -14,7 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import co.edu.unipiloto.petmonitor.R;
-import co.edu.unipiloto.petmonitor.continuacion.continuacion;
+import co.edu.unipiloto.petmonitor.Menu.menuActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToContinuation() {
-        Intent intent = new Intent(LoginActivity.this, continuacion.class);
+        Intent intent = new Intent(LoginActivity.this, menuActivity.class);
         startActivity(intent);
     }
 

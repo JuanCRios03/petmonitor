@@ -20,7 +20,16 @@
         <activity android:name=".Register.RegisterPaso3Activity"/>
         <activity android:name=".Register.RegisterPaso4Activity"/>
         <activity android:name=".Login.LoginActivity"/>
-        <activity android:name=".continuacion.continuacion"/>
+        <activity android:name=".Menu.menuActivity"/>
+        <activity android:name=".CasosdeUso.registrarNuevaMascotaActivity" />
+        <activity android:name=".CasosdeUso.monitoreoTiempoRealActivity" />
+        <activity android:name=".CasosdeUso.historialUbicacionActivity" />
+        <activity android:name=".CasosdeUso.zonaSeguraActivity" />
+        <activity android:name=".CasosdeUso.reporteActividadActivity" />
+        <activity android:name=".CasosdeUso.buscarVeterinariasActivity" />
+        <activity android:name=".CasosdeUso.registrarVacunasActivity" />
+        <activity android:name=".CasosdeUso.monitoreoEjercicioActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
