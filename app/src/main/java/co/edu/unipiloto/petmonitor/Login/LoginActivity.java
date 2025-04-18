@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -68,6 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (document.exists()) {
                             String storedPassword = document.getString("password");
                             if (storedPassword != null && storedPassword.equals(password)) {
+                                // Guardar el correo en SharedPreferences
+                                saveEmailToPreferences(email);
+
                                 // Credenciales correctas
                                 showToast("Inicio de sesión exitoso.");
                                 navigateToContinuation();
@@ -86,6 +89,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    private void saveEmailToPreferences(String email) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", email);
+        editor.apply();  // Guardar los cambios
+    }
+
     private void navigateToContinuation() {
         Intent intent = new Intent(LoginActivity.this, menuActivity.class);
         startActivity(intent);
@@ -95,4 +105,5 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
     }
 }
+
 

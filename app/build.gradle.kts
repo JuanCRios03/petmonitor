@@ -26,6 +26,16 @@ android {
             )
         }
     }
+
+    packagingOptions {
+        exclude("META-INF/LICENSE")
+        exclude("META-INF/LICENSE.txt")
+        exclude("META-INF/NOTICE")
+        exclude("META-INF/NOTICE.txt")
+        exclude("META-INF/NOTICE.md")
+        exclude("META-INF/LICENSE.md")
+        exclude("META-INF/DEPENDENCIES")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -33,7 +43,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -49,4 +58,10 @@ dependencies {
     implementation("com.google.firebase:firebase-storage:21.0.0")
     implementation("com.google.firebase:firebase-database:20.1.0")
     implementation("com.google.android.material:material:1.11.0")
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.sun.mail:android-mail:1.6.7")
+    implementation ("com.sun.mail:android-activation:1.6.7")
+
 }
