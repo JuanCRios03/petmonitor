@@ -31,6 +31,8 @@
         <activity android:name=".Menu.menuActivity"/>
         <activity android:name=".CasosdeUso.zonaSeguraActivity" />
         <activity android:name=".CasosdeUso.MapaZonaSegura" />
+        <activity android:name=".CasosdeUso.buscarVeterinariasActivity" />
+        <activity android:name=".CasosdeUso.VeterinariosActivity" />
 
 
         <activity
