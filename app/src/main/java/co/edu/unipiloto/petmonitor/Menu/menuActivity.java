@@ -1,67 +1,121 @@
 package co.edu.unipiloto.petmonitor.Menu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoTiempoRealActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.registrarNuevaMascotaActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.historialUbicacionActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.zonaSeguraActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividadActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.buscarVeterinariasActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.registrarVacunasActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicioActivity;
+import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import co.edu.unipiloto.petmonitor.R;
 
 public class menuActivity extends AppCompatActivity {
+
+        private static final int PICK_IMAGE_REQUEST = 1;
+        private ImageView imageView;
+        private FirebaseFirestore db;
+        private String currentUserEmail;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_menu);
 
-                // Botón para monitoreo de la ubicación en tiempo real
-                findViewById(R.id.btnRealTimeLocation).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, monitoreoTiempoRealActivity.class);
-                        startActivity(intent);
-                });
+                // Obtener email del usuario logueado
+                SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                currentUserEmail = sharedPreferences.getString("email", null);
 
-                // Botón para historial de ubicación
-                findViewById(R.id.btnLocationHistory).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, historialUbicacionActivity.class);
-                        startActivity(intent);
-                });
+                if (currentUserEmail == null) {
+                        Toast.makeText(this, "No hay sesión activa", Toast.LENGTH_SHORT).show();
+                        finish();
+                        return;
+                }
 
-                // Botón para registrar zona segura
-                findViewById(R.id.btnRegisterSafeZone).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, zonaSeguraActivity.class);
-                        startActivity(intent);
-                });
+                db = FirebaseFirestore.getInstance();
 
-                // Botón para reporte de actividad de la mascota
-                findViewById(R.id.btnActivityReport).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, reporteActividadActivity.class);
-                        startActivity(intent);
-                });
+                // Configurar ImageView
+                FrameLayout btnAddImage = findViewById(R.id.btnAddImage);
+                imageView = new ImageView(this);
+                imageView.setLayoutParams(new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.MATCH_PARENT));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                btnAddImage.addView(imageView);
 
-                // Botón para buscar clínicas veterinarias cercanas
-                findViewById(R.id.btnNearbyClinics).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, buscarVeterinariasActivity.class);
-                        startActivity(intent);
-                });
+                btnAddImage.setOnClickListener(view -> openImageChooser());
 
-                // Botón para registrar vacunas de la mascota
-                findViewById(R.id.btnRegisterVaccines).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, registrarVacunasActivity.class);
-                        startActivity(intent);
-                });
+                // Cargar imagen existente
+                loadExistingImage();
+        }
 
-                // Botón para monitoreo de ejercicio de la mascota
-                findViewById(R.id.btnExerciseMonitoring).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, monitoreoEjercicioActivity.class);
-                        startActivity(intent);
-                });
+        private void openImageChooser() {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        }
+
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+                super.onActivityResult(requestCode, resultCode, data);
+
+                if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+                        Uri imageUri = data.getData();
+                        try {
+                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                                imageView.setImageBitmap(bitmap);
+                                uploadImageToFirestore(bitmap);
+                        } catch (IOException e) {
+                                Toast.makeText(this, "Error al cargar imagen", Toast.LENGTH_SHORT).show();
+                        }
+                }
+        }
+
+        private void uploadImageToFirestore(Bitmap bitmap) {
+                // Convertir imagen a Base64 (para guardarla como string)
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos); // Comprimir imagen al 50%
+                byte[] imageBytes = baos.toByteArray();
+                String imageBase64 = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+                // Guardar en Firestore
+                db.collection("usuarios").document(currentUserEmail)
+                        .update("imagenBase64", imageBase64)
+                        .addOnSuccessListener(aVoid ->
+                                Toast.makeText(this, "Imagen guardada", Toast.LENGTH_SHORT).show()
+                        )
+                        .addOnFailureListener(e ->
+                                Toast.makeText(this, "Error al guardar imagen", Toast.LENGTH_SHORT).show()
+                        );
+        }
+
+        private void loadExistingImage() {
+                db.collection("usuarios").document(currentUserEmail).get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                                if (documentSnapshot.exists()) {
+                                        String imageBase64 = documentSnapshot.getString("imagenBase64");
+                                        if (imageBase64 != null && !imageBase64.isEmpty()) {
+                                                byte[] imageBytes = Base64.decode(imageBase64, Base64.DEFAULT);
+                                                Glide.with(this)
+                                                        .load(imageBytes)
+                                                        .into(imageView);
+                                        }
+                                }
+                        })
+                        .addOnFailureListener(e ->
+                                Toast.makeText(this, "Error al cargar imagen", Toast.LENGTH_SHORT).show()
+                        );
         }
 }
+
