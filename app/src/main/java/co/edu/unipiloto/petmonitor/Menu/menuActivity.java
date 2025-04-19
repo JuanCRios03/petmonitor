@@ -22,12 +22,6 @@ public class menuActivity extends AppCompatActivity {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_menu);
 
-                // Botón para registrar una nueva mascota
-                findViewById(R.id.btnRegisterPet).setOnClickListener(view -> {
-                        Intent intent = new Intent(menuActivity.this, registrarNuevaMascotaActivity.class);
-                        startActivity(intent);
-                });
-
                 // Botón para monitoreo de la ubicación en tiempo real
                 findViewById(R.id.btnRealTimeLocation).setOnClickListener(view -> {
                         Intent intent = new Intent(menuActivity.this, monitoreoTiempoRealActivity.class);
