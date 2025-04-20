@@ -44,10 +44,10 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/Veterinarios"
-                android:layout_width="350dp"
+                android:layout_width="351dp"
                 android:layout_height="500dp"
+                android:src="@drawable/perro"
                 android:scaleType="centerCrop"
-                android:src="@drawable/veterinarios"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="-30dp" />
 

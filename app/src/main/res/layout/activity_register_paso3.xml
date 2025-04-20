@@ -58,14 +58,14 @@
             android:id="@+id/etNombreMascota"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/rounded_edittext"
-            android:hint="Milo, Max, Princesa"
-            android:fontFamily="@font/titulos"
-            android:drawableEnd="@drawable/ic_arrow_dropdown"
-            android:paddingHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            android:textColorHint="@color/grayHint"
+            android:background="@drawable/rounded_edittext"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:fontFamily="@font/titulos"
+            android:hint="Milo, Max, Princesa"
+            android:paddingHorizontal="16dp"
             android:textColor="#000000"
+            android:textColorHint="@color/grayHint"
             tools:ignore="HardcodedText" />
 
         <TextView
