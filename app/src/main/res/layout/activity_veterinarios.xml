@@ -24,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buscar Veterinarios"
-            android:backgroundTint="#B48C53" />
+            android:fontFamily="@font/titulos"
+            android:backgroundTint="#DCB45E" />
 
         <Space
             android:layout_width="130dp"
@@ -35,7 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Volver"
-            android:backgroundTint="#4CAF50" />
+            android:fontFamily="@font/titulos"
+            android:backgroundTint="#75DC5E" />
     </LinearLayout>
 
     <!-- Lista de veterinarios -->

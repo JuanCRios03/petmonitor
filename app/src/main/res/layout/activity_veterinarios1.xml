@@ -17,6 +17,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:backgroundTint="#F0D0D0"
+            android:fontFamily="@font/titulos"
             android:textColor="#494249"
             android:layout_margin="8dp"
             android:padding="6dp"/>
@@ -37,6 +38,7 @@
                 android:text="Clinicas Veterinarias Cercanas"
                 android:textSize="25dp"
                 android:layout_marginBottom="50dp"
+                android:fontFamily="@font/titulos"
                 android:gravity="center"
                 android:textStyle="bold" />
 
@@ -55,8 +57,9 @@
                 android:layout_height="wrap_content"
                 android:text="Ver mapa"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/titulos"
                 android:layout_gravity="center_horizontal"
-                android:backgroundTint="#6FB307"
+                android:backgroundTint="#75DC5E"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

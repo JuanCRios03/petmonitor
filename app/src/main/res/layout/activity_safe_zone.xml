@@ -19,6 +19,7 @@
         android:backgroundTint="#F0D0D0"
         android:textColor="#494249"
         android:layout_margin="8dp"
+        android:fontFamily="@font/titulos"
         android:padding="6dp"/>
 
     <LinearLayout
@@ -38,6 +39,7 @@
             android:textSize="25dp"
             android:layout_marginBottom="50dp"
             android:gravity="center"
+            android:fontFamily="@font/titulos"
             android:textStyle="bold" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -56,6 +58,7 @@
             android:minHeight="48dp"
             android:hint="Ingrese la Latitud. Ej: 4.60971"
             android:inputType="numberDecimal"
+            android:fontFamily="@font/titulos"
             android:gravity="center"
             android:paddingVertical="12dp" />
 
@@ -67,6 +70,7 @@
             android:minHeight="48dp"
             android:hint="Ingrese la Longitud. Ej: -74.08175"
             android:gravity="center"
+            android:fontFamily="@font/titulos"
             android:inputType="numberDecimal|numberSigned"
             android:paddingVertical="12dp" />
 
@@ -79,6 +83,7 @@
             android:gravity="center"
             android:hint="Ingrese el radio (m). Ej: 50"
             android:inputType="numberDecimal"
+            android:fontFamily="@font/titulos"
             android:paddingVertical="12dp" />
 
         <Button
@@ -88,7 +93,8 @@
             android:text="Guardar"
             android:layout_marginTop="24dp"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="#75DC5E"
+            android:fontFamily="@font/titulos"
             android:textColor="#FFFFFF" />
 
         <Button
@@ -98,7 +104,8 @@
             android:text="Ver mapa"
             android:layout_marginTop="12dp"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#E0A669"
+            android:backgroundTint="#DCB45E"
+            android:fontFamily="@font/titulos"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>
