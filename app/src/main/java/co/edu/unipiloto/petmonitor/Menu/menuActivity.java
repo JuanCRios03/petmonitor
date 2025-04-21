@@ -7,20 +7,26 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 import co.edu.unipiloto.petmonitor.R;
+import android.widget.RelativeLayout;
+import co.edu.unipiloto.petmonitor.CasosdeUso.zonaSeguraActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.VeterinariosActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.historialUbicacionActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicioActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoTiempoRealActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.registrarNuevaMascotaActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.registrarVacunasActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividadActivity;
 
 public class menuActivity extends AppCompatActivity {
 
@@ -28,11 +34,54 @@ public class menuActivity extends AppCompatActivity {
         private ImageView imageView;
         private FirebaseFirestore db;
         private String currentUserEmail;
+        private RelativeLayout btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_menu);
+
+                btnRegisterSafeZone = findViewById(R.id.btnRegisterSafeZone);
+                btnRegisterSafeZone.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, zonaSeguraActivity.class);
+                        startActivity(intent);
+                });
+
+                btnNearbyClinics = findViewById(R.id.btnNearbyClinics);
+                btnNearbyClinics.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, VeterinariosActivity.class);
+                        startActivity(intent);
+                });
+
+                btnRealTimeLocation = findViewById(R.id.btnRealTimeLocation);
+                btnRealTimeLocation.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, monitoreoTiempoRealActivity.class);
+                        startActivity(intent);
+                });
+
+                btnLocationHistory = findViewById(R.id.btnLocationHistory);
+                btnLocationHistory.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, historialUbicacionActivity.class);
+                        startActivity(intent);
+                });
+
+                btnActivityReport = findViewById(R.id.btnActivityReport);
+                btnActivityReport.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, reporteActividadActivity.class);
+                        startActivity(intent);
+                });
+
+                btnExerciseMonitoring = findViewById(R.id.btnExerciseMonitoring);
+                btnExerciseMonitoring.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, monitoreoEjercicioActivity.class);
+                        startActivity(intent);
+                });
+
+                btnRegisterVaccines = findViewById(R.id.btnRegisterVaccines);
+                btnRegisterVaccines.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, registrarVacunasActivity.class);
+                        startActivity(intent);
+                });
 
                 // Obtener email del usuario logueado
                 SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);

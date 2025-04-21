@@ -24,9 +24,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetMonitor"
         tools:targetApi="31">
+
+        <!--<meta-data
+        android:name="com.google.firebase.firestore.FirebaseFirestore"
+            android:value="default"/>-->
+
         <meta-data
-            android:name="com.google.firebase.firestore.FirebaseFirestore"
-            android:value="default" />
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDv9hxapxELI-ldc8EuN8RVqw5EwJrTcF0"/>
+
+
         <activity android:name=".Register.RegisterPaso1Activity"/>
         <activity android:name=".Register.RegisterPaso2Activity"/>
         <activity android:name=".Register.RegisterPaso3Activity"/>
