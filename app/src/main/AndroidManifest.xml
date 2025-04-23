@@ -9,10 +9,14 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,9 +24,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetMonitor"
         tools:targetApi="31">
+
+        <!--<meta-data
+        android:name="com.google.firebase.firestore.FirebaseFirestore"
+            android:value="default"/>-->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAMp_LEifcWuwwHbWa99j8IMUN6MjFj_SQ" />
+            android:value="AIzaSyDv9hxapxELI-ldc8EuN8RVqw5EwJrTcF0"/>
+
+
         <activity android:name=".Register.RegisterPaso1Activity"/>
         <activity android:name=".Register.RegisterPaso2Activity"/>
         <activity android:name=".Register.RegisterPaso3Activity"/>
@@ -31,6 +42,8 @@
         <activity android:name=".Menu.menuActivity"/>
         <activity android:name=".CasosdeUso.zonaSeguraActivity" />
         <activity android:name=".CasosdeUso.MapaZonaSegura" />
+        <activity android:name=".CasosdeUso.buscarVeterinariasActivity" />
+        <activity android:name=".CasosdeUso.VeterinariosActivity" />
 
 
         <activity

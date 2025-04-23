@@ -8,19 +8,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import co.edu.unipiloto.petmonitor.R;
 
 public class RegisterPaso3Activity extends AppCompatActivity {
 
     EditText etNombreMascota, etEspecie, etRaza, etPeso;
     Button btnGuardarMascota;
-    FirebaseFirestore db;
     String email;
 
     @Override
@@ -34,10 +27,14 @@ public class RegisterPaso3Activity extends AppCompatActivity {
         etPeso = findViewById(R.id.etPeso);
         btnGuardarMascota = findViewById(R.id.btnGuardarMascota);
 
-        db = FirebaseFirestore.getInstance();
-
         // Obtener el email desde la actividad anterior
         email = getIntent().getStringExtra("email");
+
+        // Rellenar campos si regresaron del paso 4
+        etNombreMascota.setText(getIntent().getStringExtra("nombreMascota"));
+        etEspecie.setText(getIntent().getStringExtra("especie"));
+        etRaza.setText(getIntent().getStringExtra("raza"));
+        etPeso.setText(getIntent().getStringExtra("peso"));
 
         btnGuardarMascota.setOnClickListener(v -> {
             String nombre = etNombreMascota.getText().toString().trim();
@@ -50,30 +47,18 @@ public class RegisterPaso3Activity extends AppCompatActivity {
                 return;
             }
 
-            Map<String, Object> mascota = new HashMap<>();
-            mascota.put("nombreMascota", nombre);
-            mascota.put("especie", especie);
-            mascota.put("raza", raza);
-            mascota.put("peso", peso);
-
-            // Guardar los datos de la mascota dentro del documento del usuario
-            db.collection("usuarios")
-                    .document(email)
-                    .set(mascota, SetOptions.merge()) // Merge para no borrar los datos anteriores
-                    .addOnSuccessListener(unused -> {
-                        Toast.makeText(this, "Mascota guardada", Toast.LENGTH_SHORT).show();
-
-                        // Redirigir a la siguiente pantalla
-                        Intent intent = new Intent(this, RegisterPaso4Activity.class);
-                        intent.putExtra("email", email); // Por si necesitas seguir usando el correo
-                        startActivity(intent);
-                        finish();
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Error al guardar en la base de datos", Toast.LENGTH_SHORT).show();
-                    });
+            // Pasar datos a la siguiente pantalla
+            Intent intent = new Intent(this, RegisterPaso4Activity.class);
+            intent.putExtra("email", email);
+            intent.putExtra("nombreMascota", nombre);
+            intent.putExtra("especie", especie);
+            intent.putExtra("raza", raza);
+            intent.putExtra("peso", peso);
+            startActivity(intent);
+            finish();
         });
     }
 }
+
 
 

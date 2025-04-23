@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:text="Home"
+            android:textSize="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:backgroundTint="#F0D0D0"
+            android:fontFamily="@font/titulos"
+            android:textColor="#494249"
+            android:layout_margin="8dp"
+            android:padding="6dp"/>
+
+        <LinearLayout
+            android:id="@+id/layoutSafeZone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/btnHome"
+            android:background="#F9F9F9">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clinicas Veterinarias Cercanas"
+                android:textSize="25dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="@font/titulos"
+                android:gravity="center"
+                android:textStyle="bold" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/Veterinarios"
+                android:layout_width="351dp"
+                android:layout_height="500dp"
+                android:src="@drawable/perro"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="-30dp" />
+
+            <Button
+                android:id="@+id/btnVerMapa"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Ver mapa"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/titulos"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#75DC5E"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
