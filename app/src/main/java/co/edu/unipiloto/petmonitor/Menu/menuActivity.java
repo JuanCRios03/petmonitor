@@ -17,14 +17,14 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio;
 import co.edu.unipiloto.petmonitor.R;
 import android.widget.RelativeLayout;
 import co.edu.unipiloto.petmonitor.CasosdeUso.zonaSeguraActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.VeterinariosActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.historialUbicacionActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicioActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoTiempoRealActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.registrarNuevaMascotaActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.registrarVacunasActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividadActivity;
 
@@ -73,7 +73,7 @@ public class menuActivity extends AppCompatActivity {
 
                 btnExerciseMonitoring = findViewById(R.id.btnExerciseMonitoring);
                 btnExerciseMonitoring.setOnClickListener(v -> {
-                        Intent intent = new Intent(menuActivity.this, monitoreoEjercicioActivity.class);
+                        Intent intent = new Intent(menuActivity.this, monitoreoEjercicio.class);
                         startActivity(intent);
                 });
 

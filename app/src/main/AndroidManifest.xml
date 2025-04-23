@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- PERMISOS -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,28 +19,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetMonitor"
         tools:targetApi="31">
-
-        <!--<meta-data
-        android:name="com.google.firebase.firestore.FirebaseFirestore"
-            android:value="default"/>-->
+        <activity
+            android:name=".CasosdeUso.resumenEjercicio"
+            android:exported="false" />
+        <activity
+            android:name=".CasosdeUso.monitoreoEjercicio"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDv9hxapxELI-ldc8EuN8RVqw5EwJrTcF0"/>
+            android:value="AIzaSyAMp_LEifcWuwwHbWa99j8IMUN6MjFj_SQ" />
 
-
-        <activity android:name=".Register.RegisterPaso1Activity"/>
-        <activity android:name=".Register.RegisterPaso2Activity"/>
-        <activity android:name=".Register.RegisterPaso3Activity"/>
-        <activity android:name=".Register.RegisterPaso4Activity"/>
-        <activity android:name=".Login.LoginActivity"/>
-        <activity android:name=".Menu.menuActivity"/>
+        <activity android:name=".Register.RegisterPaso1Activity" />
+        <activity android:name=".Register.RegisterPaso2Activity" />
+        <activity android:name=".Register.RegisterPaso3Activity" />
+        <activity android:name=".Register.RegisterPaso4Activity" />
+        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".Menu.menuActivity" />
         <activity android:name=".CasosdeUso.zonaSeguraActivity" />
         <activity android:name=".CasosdeUso.MapaZonaSegura" />
-        <activity android:name=".CasosdeUso.buscarVeterinariasActivity" />
-        <activity android:name=".CasosdeUso.VeterinariosActivity" />
-
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
