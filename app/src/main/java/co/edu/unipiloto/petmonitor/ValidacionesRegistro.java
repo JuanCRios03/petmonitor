@@ -1,5 +1,7 @@
 package co.edu.unipiloto.petmonitor;
 
+/*Pruebas unitarias*/
+
 public class ValidacionesRegistro {
 
     public static boolean validarCampos(String nombre, String apellido, String email) {

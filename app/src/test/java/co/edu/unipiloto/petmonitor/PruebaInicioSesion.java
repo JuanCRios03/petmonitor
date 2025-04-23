@@ -3,7 +3,7 @@ package co.edu.unipiloto.petmonitor;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/*Pruebaaaaa*/
+/*Pruebas unitarias*/
 
 import org.junit.Test;
 

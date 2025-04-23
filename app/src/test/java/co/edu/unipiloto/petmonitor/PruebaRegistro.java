@@ -3,6 +3,8 @@ package co.edu.unipiloto.petmonitor;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/*Pruebas unitarias*/
+
 public class PruebaRegistro {
 
     @Test

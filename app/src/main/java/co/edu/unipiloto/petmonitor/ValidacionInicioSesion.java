@@ -1,5 +1,7 @@
 package co.edu.unipiloto.petmonitor;
 
+/*Pruebas unitarias*/
+
 public class ValidacionInicioSesion {
 
     public static boolean camposCompletos(String email, String password) {
