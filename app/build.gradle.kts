@@ -69,6 +69,9 @@ dependencies {
     implementation ("com.google.firebase:firebase-bom:32.7.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
+    // Dependencia para pruebas unitarias
+    testImplementation ("junit:junit:4.13.2")
+
 
 
 
