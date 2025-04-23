@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F0F8FF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/titleReporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Generar Reporte de Mascota"
+            android:textSize="31sp"
+        android:textStyle="bold"
+            android:textColor="#006400"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fecha de inicio:"
+            android:textColor="#333332"/>
+
+        <EditText
+            android:id="@+id/editFechaInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="dd/mm/aaaa"
+            android:inputType="none"
+            android:drawableEnd="@android:drawable/ic_menu_today"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#E6F7FF"
+        android:textColor="#333333" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fecha de fin:"
+            android:textColor="#333333"/>
+
+        <EditText
+            android:id="@+id/editFechaFin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="dd/mm/aaaa"
+            android:inputType="none"
+            android:drawableEnd="@android:drawable/ic_menu_today"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#E6F7FF"
+            android:textColor="#333333" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo de reporte:"
+            android:textColor="#333333"/>
+
+        <Spinner
+            android:id="@+id/spinnerTipoReporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID de la Mascota:"
+            android:textColor="#333333"/>
+
+        <EditText
+            android:id="@+id/editIdMascota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese el ID o nombre de su mascota"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="#E6F7FF"
+            android:textColor="#333333" />
+
+        <!-- Botón verde claro -->
+        <Button
+            android:id="@+id/btnGenerarReporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Generar Reporte"
+            android:backgroundTint="#00FF99"
+            android:textColor="#000000"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
+            android:padding="12dp" />
+
+        <!-- Botón café claro -->
+        <Button
+            android:id="@+id/btnExportarPDF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exportar a PDF"
+            android:backgroundTint="#D2B48C"
+            android:textColor="#000000"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
+            android:padding="12dp" />
+
+        <!-- Botón café oscuro -->
+        <Button
+            android:id="@+id/btnExportarExcel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exportar a Excel"
+            android:backgroundTint="#A0522D"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:padding="12dp" />
+    </LinearLayout>
+</ScrollView>
+
+
