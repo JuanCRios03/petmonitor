@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CasosdeUso.monitoreoEjercicio">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/title_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/titulos"
+            android:gravity="center"
+            android:text="Monitoreo de"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/title_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-40dp"
+            android:fontFamily="@font/titulos"
+            android:gravity="center"
+            android:text="Ejercicio"
+            android:textColor="@color/black"
+            android:textSize="60sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvContador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="00:00"
+            android:textSize="100sp"
+            android:fontFamily="@font/titulos"
+            android:textColor="@color/black"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-30dp"
+            android:src="@drawable/mot_ejerc_frame1" />
+
+        <Button
+            android:id="@+id/btnIniciar"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/greenButton"
+            android:fontFamily="@font/titulos"
+            android:text="Iniciar"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnPausar"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/blueButton"
+            android:fontFamily="@font/titulos"
+            android:text="Pausar"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnFinalizar"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/redButton"
+            android:fontFamily="@font/titulos"
+            android:text="Finalizar"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            tools:ignore="HardcodedText" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
