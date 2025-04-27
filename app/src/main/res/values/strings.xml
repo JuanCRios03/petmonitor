@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">PetMonitor</string>
+
+    <string-array name="tipos_mascota_array">
+        <item>Seleccione Tipo...</item>
+        <item>Perro</item>
+        <item>Gato</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="tipos_vacuna_array">
+        <item>Seleccione Vacuna...</item>
+        <item>Parvovirus</item>
+        <item>Moquillo</item>
+        <item>Rabia</item>
+        <item>Leptospirosis</item>
+        <item>Triple Felina</item>
+        <item>Leucemia Felina</item>
+        <item>Otra</item>
+    </string-array>
+
+    <string-array name="dosis_vacuna_array">
+        <item>Seleccione Dosis...</item>
+        <item>Primera</item>
+        <item>Segunda</item>
+        <item>Tercera</item>
+        <item>Refuerzo Anual</item>
+        <item>Única</item>
+        <item>Otra</item>
+    </string-array>
+    */
+
+    Ejemplo en colors.xml:
+    <color name="lightGray">#D3D3D3</color>
 </resources>

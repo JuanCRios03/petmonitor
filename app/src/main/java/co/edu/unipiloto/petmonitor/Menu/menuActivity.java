@@ -41,6 +41,8 @@ public class menuActivity extends AppCompatActivity {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_menu);
 
+
+
                 btnRegisterSafeZone = findViewById(R.id.btnRegisterSafeZone);
                 btnRegisterSafeZone.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, zonaSeguraActivity.class);

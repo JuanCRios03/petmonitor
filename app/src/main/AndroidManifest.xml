@@ -38,6 +38,10 @@
         <activity android:name=".Menu.menuActivity" />
         <activity android:name=".CasosdeUso.zonaSeguraActivity" />
         <activity android:name=".CasosdeUso.MapaZonaSegura" />
+
+        <activity android:name=".CasosdeUso.registrarVacunasActivity"  android:exported="false" />
+        <activity android:name=".vacuna.HistorialVacunasActivity" android:exported="false"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
