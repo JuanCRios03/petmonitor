@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".CasosdeUso.registrarVacunasActivity">
+    tools:context=".RegistroVacunaActivity">
 
     <TextView
         android:id="@+id/textView2"
@@ -190,14 +190,14 @@
 
     <LinearLayout
         android:id="@+id/layoutBotones"
-        android:layout_width="389dp"
-        android:layout_height="63dp"
-        android:layout_marginHorizontal="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etObservaciones"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etObservaciones">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="40dp">
 
         <Button
             android:id="@+id/btnVolver"
@@ -229,18 +229,6 @@
             android:backgroundTint="@color/blueButton"
             android:fontFamily="@font/titulos"
             android:text="Limpiar"
-            android:textSize="10sp" />
-
-        <Button
-            android:id="@+id/btnVerHistorial"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/blueButton"
-            android:fontFamily="@font/titulos"
-            android:text="Historial"
-            android:textColor="@color/white"
             android:textSize="10sp" />
     </LinearLayout>
 

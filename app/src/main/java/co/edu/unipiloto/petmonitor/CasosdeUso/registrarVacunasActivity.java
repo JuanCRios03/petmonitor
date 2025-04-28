@@ -108,7 +108,7 @@ public class registrarVacunasActivity extends AppCompatActivity {
         btnVolver = findViewById(R.id.btnVolver);
         btnRegistrar = findViewById(R.id.btnRegistrar);
         btnLimpiar = findViewById(R.id.btnLimpiar);
-        btnVerHistorial = findViewById(R.id.btnVerHistorial); // Inicializar botón historial
+        //btnVerHistorial = findViewById(R.id.btnVerHistorial); // Inicializar botón historial
 
         // Hacemos no editables los campos de la mascota que cargaremos
         etNombreMascota.setEnabled(false);
