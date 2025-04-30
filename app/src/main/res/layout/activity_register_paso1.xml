@@ -19,12 +19,12 @@
             android:id="@+id/txtBienvenida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Empecemos"
-            android:fontFamily="@font/titulos"
-            android:textSize="60sp"
             android:layout_marginBottom="16dp"
+            android:fontFamily="@font/titulos"
+            android:text="Empecemos"
             android:textColor="@color/black"
-            tools:ignore="HardcodedText"/>
+            android:textSize="55sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/de_nuevo"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"
             tools:ignore="HardcodedText"
-            android:layout_marginStart="-35dp"
+            android:layout_marginStart="-21dp"
             android:layout_marginTop="-65dp"/>
 
         <com.google.android.material.imageview.ShapeableImageView
