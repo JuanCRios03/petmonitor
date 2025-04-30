@@ -24,6 +24,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -44,6 +46,7 @@ public class monitoreoEjercicio extends AppCompatActivity {
     private double latitudeFinal, longitudeFinal;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String currentUserEmail;
+    private String uid;
     private float distancia = 0;
     private String duracion = "00:00";
     private double calorias = 0;
@@ -74,13 +77,9 @@ public class monitoreoEjercicio extends AppCompatActivity {
             return insets;
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        currentUserEmail = sharedPreferences.getString("email", null);
-
-        if (currentUserEmail == null) {
-            Toast.makeText(this, "No hay sesión activa", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
         }
 
         imageView = findViewById(R.id.imageView);
@@ -191,7 +190,7 @@ public class monitoreoEjercicio extends AppCompatActivity {
         location.put("longitudeInicial", longitudeInicial);
         location.put("latitudeFinal", latitudeFinal);
         location.put("longitudeFinal", longitudeFinal);
-        location.put("email", currentUserEmail);
+        location.put("userid", uid);
         location.put("duracion", duracion);
         location.put("distancia", distancia);
         location.put("calorias", calorias);
