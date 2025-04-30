@@ -70,6 +70,7 @@ dependencies {
     implementation ("com.google.android.gms:play-services-location:21.0.1")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
+
     // Dependencia para pruebas unitarias
     testImplementation ("junit:junit:4.13.2")
 

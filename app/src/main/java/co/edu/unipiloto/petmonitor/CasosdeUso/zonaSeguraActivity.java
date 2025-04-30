@@ -4,6 +4,7 @@ import co.edu.unipiloto.petmonitor.Menu.menuActivity;
 import co.edu.unipiloto.petmonitor.R;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -116,62 +117,77 @@ public class zonaSeguraActivity extends AppCompatActivity {
 
     private String getEmailFromPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        return sharedPreferences.getString("email", null);
+        String email = sharedPreferences.getString("email", null);
+        Log.d("ZonaSegura", "Email recuperado de SharedPreferences: " + email); // Agregar log para depuración
+        return email;
     }
+
 
     private void guardarZonaSeguraEnFirestore(String email) {
         if (!validarCampos()) return;
 
+        // Buscar al usuario por su email
         db.collection("usuarios")
-                .document(email)
+                .whereEqualTo("email", email)
                 .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        // Datos del usuario
-                        String nombre = documentSnapshot.getString("nombre");
-                        String apellido = documentSnapshot.getString("apellido");
-                        String edad = documentSnapshot.getString("edad");
-                        String especie = documentSnapshot.getString("especie");
-                        String nombreMascota = documentSnapshot.getString("nombreMascota");
-                        String raza = documentSnapshot.getString("raza");
-                        String peso = documentSnapshot.getString("peso");
-                        String password = documentSnapshot.getString("password");
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // Usuario encontrado
+                        String userId = queryDocumentSnapshots.getDocuments().get(0).getId();
 
-                        // Obtener coordenadas
-                        double lat = etLatitude.getText().toString().isEmpty() ? currentLatitude : Double.parseDouble(etLatitude.getText().toString());
-                        double lon = etLongitude.getText().toString().isEmpty() ? currentLongitude : Double.parseDouble(etLongitude.getText().toString());
-                        float radio = Float.parseFloat(etRadius.getText().toString());
+                        // Verificar si tiene al menos una mascota
+                        db.collection("usuarios").document(userId)
+                                .collection("mascotas")
+                                .get()
+                                .addOnSuccessListener(mascotasSnapshots -> {
+                                    if (!mascotasSnapshots.isEmpty()) {
+                                        // Mascota encontrada, obtener el primer ID de mascota
+                                        String mascotaId = mascotasSnapshots.getDocuments().get(0).getId();
 
-                        // Map de datos
-                        Map<String, Object> datos = new HashMap<>();
-                        datos.put("nombre", nombre);
-                        datos.put("apellido", apellido);
-                        datos.put("edad", edad);
-                        datos.put("especie", especie);
-                        datos.put("nombreMascota", nombreMascota);
-                        datos.put("raza", raza);
-                        datos.put("peso", peso);
-                        datos.put("password", password);
-                        datos.put("email", email);
-                        datos.put("latitud", lat);
-                        datos.put("longitud", lon);
-                        datos.put("radio", radio);
-
-                        db.collection("usuarios").document(email)
-                                .set(datos)
-                                .addOnSuccessListener(unused -> {
-                                    Toast.makeText(this, "Zona segura guardada en Firestore", Toast.LENGTH_SHORT).show();
-
+                                        // Guardar la zona segura
+                                        guardarZonaSegura(userId, mascotaId);
+                                    } else {
+                                        // No se encontraron mascotas
+                                        Toast.makeText(this, "No se encontró ninguna mascota asociada a este usuario.", Toast.LENGTH_SHORT).show();
+                                    }
                                 })
                                 .addOnFailureListener(e -> {
-                                    Toast.makeText(this, "Error al guardar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Error al buscar mascotas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 });
-                    } else {
-                        Toast.makeText(this, "No se encontró el usuario con el correo: " + email, Toast.LENGTH_SHORT).show();
+
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al obtener los datos del usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error al buscar usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    // Método para guardar la zona segura
+    private void guardarZonaSegura(String userId, String mascotaId) {
+        // Obtener valores de la zona segura
+        double lat = etLatitude.getText().toString().isEmpty() ? currentLatitude : Double.parseDouble(etLatitude.getText().toString());
+        double lon = etLongitude.getText().toString().isEmpty() ? currentLongitude : Double.parseDouble(etLongitude.getText().toString());
+        float radio = Float.parseFloat(etRadius.getText().toString());
+
+        // Crear el mapa de datos
+        Map<String, Object> datosZona = new HashMap<>();
+        datosZona.put("latitud", lat);
+        datosZona.put("longitud", lon);
+        datosZona.put("radio", radio);
+        datosZona.put("timestamp", System.currentTimeMillis());
+
+        // Guardar en la subcolección "zonasegura" de la mascota
+        db.collection("usuarios")
+                .document(userId)
+                .collection("mascotas")
+                .document(mascotaId)
+                .collection("zonasegura")
+                .add(datosZona)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Zona segura guardada correctamente", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al guardar zona segura: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 

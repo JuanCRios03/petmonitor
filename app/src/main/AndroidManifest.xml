@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetMonitor"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".CasosdeUso.monitoreoEjercicio2"
             android:exported="false" />
@@ -27,6 +28,12 @@
             android:exported="false" />
         <activity
             android:name=".CasosdeUso.monitoreoEjercicio"
+            android:exported="false" />
+        <activity
+            android:name=".CasosdeUso.monitoreoTiempoRealActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CasosdeUso.historialUbicacionActivity"
             android:exported="false" />
 
         <meta-data

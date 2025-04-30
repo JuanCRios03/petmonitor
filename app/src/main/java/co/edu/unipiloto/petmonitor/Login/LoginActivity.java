@@ -4,24 +4,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import co.edu.unipiloto.petmonitor.Menu.menuActivity;
+import co.edu.unipiloto.petmonitor.MisMascotas;
 import co.edu.unipiloto.petmonitor.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etGmail, etPassword;
     private Button btnLogin, btnBack;
-    private FirebaseFirestore db;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnBack = findViewById(R.id.btnBack);
 
-        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(v -> {
             String email = etGmail.getText().toString().trim();
@@ -51,26 +50,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        db.collection("usuarios").document(email).get()
+        auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            String storedPassword = document.getString("password");
-                            if (storedPassword != null && storedPassword.equals(password)) {
-                                saveUserSession(email);
-                                showToast("Inicio de sesión exitoso.");
-                                startActivity(new Intent(this, menuActivity.class));
-                                finish();
-                            } else {
-                                showToast("Contraseña incorrecta.");
-                            }
-                        } else {
-                            showToast("Usuario no registrado.");
+                        FirebaseUser user = auth.getCurrentUser();
+                        if (user != null) {
+                            saveUserSession(user.getEmail());
+                            showToast("Inicio de sesión exitoso.");
+                            startActivity(new Intent(this, MisMascotas.class));
+                            finish();
                         }
                     } else {
-                        Log.e("LoginError", "Error detallado: ", task.getException());
-                        showToast("Error al conectar: " + task.getException().getMessage());
+                        Log.e("LoginError", "Error: ", task.getException());
+                        showToast("Error de autenticación: " + task.getException().getMessage());
                     }
                 });
     }

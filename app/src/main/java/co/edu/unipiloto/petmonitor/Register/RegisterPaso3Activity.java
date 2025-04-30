@@ -8,13 +8,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import co.edu.unipiloto.petmonitor.R;
 
 public class RegisterPaso3Activity extends AppCompatActivity {
 
     EditText etNombreMascota, etEspecie, etRaza, etPeso;
     Button btnGuardarMascota;
-    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +29,7 @@ public class RegisterPaso3Activity extends AppCompatActivity {
         etPeso = findViewById(R.id.etPeso);
         btnGuardarMascota = findViewById(R.id.btnGuardarMascota);
 
-        // Obtener el email desde la actividad anterior
-        email = getIntent().getStringExtra("email");
-
-        // Rellenar campos si regresaron del paso 4
+        // Recuperar datos si regresan del paso 4
         etNombreMascota.setText(getIntent().getStringExtra("nombreMascota"));
         etEspecie.setText(getIntent().getStringExtra("especie"));
         etRaza.setText(getIntent().getStringExtra("raza"));
@@ -47,9 +46,14 @@ public class RegisterPaso3Activity extends AppCompatActivity {
                 return;
             }
 
-            // Pasar datos a la siguiente pantalla
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser == null) {
+                Toast.makeText(this, "Debes iniciar sesión primero", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Pasar datos a la siguiente actividad
             Intent intent = new Intent(this, RegisterPaso4Activity.class);
-            intent.putExtra("email", email);
             intent.putExtra("nombreMascota", nombre);
             intent.putExtra("especie", especie);
             intent.putExtra("raza", raza);
@@ -59,6 +63,8 @@ public class RegisterPaso3Activity extends AppCompatActivity {
         });
     }
 }
+
+
 
 
 

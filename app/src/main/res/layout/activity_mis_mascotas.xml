@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,47 +8,59 @@
     android:layout_height="match_parent"
     tools:context=".MisMascotas">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/titulos"
-            android:gravity="center"
-            android:text="Mis mascotas"
-            android:textColor="@color/black"
-            android:textSize="40sp"
-            tools:ignore="HardcodedText" />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_gravity="center">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/home_img"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/add_pet"
-                app:shapeAppearanceOverlay="@style/RoundedImageViewStyle" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Max"
-                android:textSize="40sp"
-                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/titulos"
+                android:gravity="center"
+                android:text="Mis mascotas"
+                android:textColor="@color/black"
+                android:textSize="40sp"
                 tools:ignore="HardcodedText" />
-        </FrameLayout>
-    </LinearLayout>
+
+            <!-- Contenedor dinámico de tarjetas de mascotas -->
+            <LinearLayout
+                android:id="@+id/layoutMascotas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botón flotante para agregar nueva mascota -->
+    <ImageButton
+        android:id="@+id/btnAgregarMascota"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/plus_button"
+        android:contentDescription="Agregar mascota"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 

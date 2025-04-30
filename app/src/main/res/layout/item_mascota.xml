@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginBottom="1dp"
+    android:clickable="true">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/mascotaImage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/add_pet" />
+
+    <TextView
+        android:id="@+id/mascotaNombre"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:fontFamily="@font/titulos"
+        android:gravity="center"
+        android:text="NombreMascota"
+        android:textColor="@android:color/white"
+        android:textSize="32sp" />
+</FrameLayout>

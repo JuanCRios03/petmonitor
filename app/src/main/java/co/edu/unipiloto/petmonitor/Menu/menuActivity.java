@@ -13,8 +13,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -34,6 +36,8 @@ public class menuActivity extends AppCompatActivity {
         private ImageView imageView;
         private FirebaseFirestore db;
         private String currentUserEmail;
+        private String mascotaId; // ← Se agrega para recibirlo por intent
+
         private RelativeLayout btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines;
 
         @Override
@@ -41,47 +45,60 @@ public class menuActivity extends AppCompatActivity {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_menu);
 
-
+                // Obtener el ID de la mascota
+                mascotaId = getIntent().getStringExtra("mascotaId");
+                if (mascotaId == null) {
+                        Toast.makeText(this, "No se recibió el ID de la mascota", Toast.LENGTH_SHORT).show();
+                        finish();
+                        return;
+                }
 
                 btnRegisterSafeZone = findViewById(R.id.btnRegisterSafeZone);
                 btnRegisterSafeZone.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, zonaSeguraActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
 
                 btnNearbyClinics = findViewById(R.id.btnNearbyClinics);
                 btnNearbyClinics.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, VeterinariosActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
 
                 btnRealTimeLocation = findViewById(R.id.btnRealTimeLocation);
                 btnRealTimeLocation.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, monitoreoTiempoRealActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
 
                 btnLocationHistory = findViewById(R.id.btnLocationHistory);
                 btnLocationHistory.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, historialUbicacionActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
 
                 btnActivityReport = findViewById(R.id.btnActivityReport);
                 btnActivityReport.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, reporteActividadActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
 
                 btnExerciseMonitoring = findViewById(R.id.btnExerciseMonitoring);
                 btnExerciseMonitoring.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, monitoreoEjercicio.class);
+                        intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
 
                 btnRegisterVaccines = findViewById(R.id.btnRegisterVaccines);
                 btnRegisterVaccines.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, registrarVacunasActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
 
@@ -134,13 +151,11 @@ public class menuActivity extends AppCompatActivity {
         }
 
         private void uploadImageToFirestore(Bitmap bitmap) {
-                // Convertir imagen a Base64 (para guardarla como string)
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos); // Comprimir imagen al 50%
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                 byte[] imageBytes = baos.toByteArray();
                 String imageBase64 = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-                // Guardar en Firestore
                 db.collection("usuarios").document(currentUserEmail)
                         .update("imagenBase64", imageBase64)
                         .addOnSuccessListener(aVoid ->
@@ -169,4 +184,3 @@ public class menuActivity extends AppCompatActivity {
                         );
         }
 }
-
