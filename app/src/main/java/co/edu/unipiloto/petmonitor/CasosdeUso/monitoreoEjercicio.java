@@ -1,6 +1,7 @@
 package co.edu.unipiloto.petmonitor.CasosdeUso;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -23,7 +24,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -40,10 +40,13 @@ public class monitoreoEjercicio extends AppCompatActivity {
     private boolean contadorActivo = false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private FusedLocationProviderClient fusedLocationClient;
-    private double latitude, longitude;
+    private double latitudeInicial, longitudeInicial;
+    private double latitudeFinal, longitudeFinal;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String currentUserEmail;
-
+    private float distancia = 0;
+    private String duracion = "00:00";
+    private double calorias = 0;
 
     private Runnable runnable = new Runnable() {
         @Override
@@ -52,12 +55,9 @@ public class monitoreoEjercicio extends AppCompatActivity {
                 seconds++;
                 int minutes = seconds / 60;
                 int sec = seconds % 60;
-                String time = String.format("%02d:%02d", minutes, sec);
-                tvContador.setText(time);
+                duracion = String.format("%02d:%02d", minutes, sec);
+                tvContador.setText(duracion);
                 handler.postDelayed(this, 1000);
-                if (seconds % 5 == 0) {
-                    saveLocationOnDB(seconds);
-                }
             }
         }
     };
@@ -89,12 +89,15 @@ public class monitoreoEjercicio extends AppCompatActivity {
         Button btnPausar = findViewById(R.id.btnPausar);
         Button btnFinalizar = findViewById(R.id.btnFinalizar);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         btnIniciar.setOnClickListener(v -> {
             imageView.setVisibility(View.GONE);
             tvContador.setVisibility(View.VISIBLE);
             if (!contadorActivo) {
                 contadorActivo = true;
                 handler.post(runnable);
+                getInitialLocation();
             }
         });
 
@@ -106,40 +109,67 @@ public class monitoreoEjercicio extends AppCompatActivity {
         btnFinalizar.setOnClickListener(v -> {
             contadorActivo = false;
             handler.removeCallbacks(runnable);
-            seconds = 0;
-            tvContador.setText("00:00");
             tvContador.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
+
+            getFinalLocationAndProceed();
         });
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        getLastLocation();
     }
 
-
-    private double[] getLastLocation() {
-        double[] locationArray = new double[2];
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "No tienes permisos de ubicación", Toast.LENGTH_SHORT).show();
-            return null;
+    private void getInitialLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            return;
         }
 
-        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                } else {
-                    Toast.makeText(monitoreoEjercicio.this, "No se pudo obtener la ubicación.", Toast.LENGTH_SHORT).show();
-                }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                latitudeInicial = location.getLatitude();
+                longitudeInicial = location.getLongitude();
+            } else {
+                Toast.makeText(this, "Ubicación inicial no disponible.", Toast.LENGTH_SHORT).show();
             }
         });
-        locationArray[0] = latitude;
-        locationArray[1] = longitude;
-        return locationArray;
     }
 
+    private void getFinalLocationAndProceed() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "No tienes permisos de ubicación", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                latitudeFinal = location.getLatitude();
+                longitudeFinal = location.getLongitude();
+
+                Location locInicial = new Location("punto inicial");
+                locInicial.setLatitude(latitudeInicial);
+                locInicial.setLongitude(longitudeInicial);
+
+                Location locFinal = new Location("punto final");
+                locFinal.setLatitude(latitudeFinal);
+                locFinal.setLongitude(longitudeFinal);
+
+                distancia = locInicial.distanceTo(locFinal); // en metros
+
+                calorias = (distancia / 1000.0) * 50; // Suponiendo 50 kcal por km
+
+                saveLocationOnDB();
+
+                Intent intent = new Intent(this, monitoreoEjercicio2.class);
+                intent.putExtra("distancia", distancia);
+                intent.putExtra("duracion", duracion);
+                intent.putExtra("calorias", calorias);
+                startActivity(intent);
+
+            } else {
+                Toast.makeText(this, "Ubicación final no disponible.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -148,22 +178,23 @@ public class monitoreoEjercicio extends AppCompatActivity {
 
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLastLocation();
+                getInitialLocation();
             } else {
                 Toast.makeText(this, "Permiso de ubicación denegado.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public void saveLocationOnDB(int second) {
-        double[] currentLocation = getLastLocation();
-        if (currentLocation == null) return;
-        double latitude = currentLocation[0];
-        double longitude = currentLocation[1];
+    public void saveLocationOnDB() {
         Map<String, Object> location = new HashMap<>();
-        location.put("latitude", latitude);
-        location.put("longitude", longitude);
+        location.put("latitudeInicial", latitudeInicial);
+        location.put("longitudeInicial", longitudeInicial);
+        location.put("latitudeFinal", latitudeFinal);
+        location.put("longitudeFinal", longitudeFinal);
         location.put("email", currentUserEmail);
+        location.put("duracion", duracion);
+        location.put("distancia", distancia);
+        location.put("calorias", calorias);
         db.collection("exercise_location").add(location);
     }
 }

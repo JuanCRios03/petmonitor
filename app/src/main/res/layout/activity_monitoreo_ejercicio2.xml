@@ -1,72 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:id="@+id/main"
+    android:background="@android:color/white">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Resumen"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <!-- Imagen -->
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="Niño con perro"
-        android:src="@drawable/child_with_dog2" />
-
-    <!-- Datos del Resumen -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
+        <!-- Título -->
         <TextView
-            android:id="@+id/distancia"
+            android:id="@+id/tvResumenTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Distancia recorrida:"
-            android:textSize="16sp" />
+            android:text="Resumen"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/duracion"
+        <!-- Imagen -->
+        <ImageView
+            android:id="@+id/imgResumen"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/child_with_dog2"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Fila 1: Distancia -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFD966"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Distancia\nrecorrida:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txtDistancia"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:text="1km"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
+
+        <!-- Fila 2: Duración -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFD966"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Duracion:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txtDuracion"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:text="60m"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
+
+        <!-- Fila 3: Calorías -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFD966"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Calorias\nestimadas:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txtCalorias"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:text="300cal"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
+
+        <!-- Botón -->
+        <Button
+            android:id="@+id/btnVolverInicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Duración:"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/calorias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calorías estimadas:"
-            android:textSize="16sp" />
+            android:text="VOLVER AL INICIO"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#00FFB0"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_button" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnIniciarSesion"
-        android:layout_width="320dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/greenButton"
-        android:fontFamily="@font/titulos"
-        android:text="Volver al inicio"
-        android:textSize="30sp"
-        tools:ignore="HardcodedText" />
-
-
-</LinearLayout>
+</ScrollView>
