@@ -1,5 +1,6 @@
 package co.edu.unipiloto.petmonitor.CasosdeUso;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -13,7 +14,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import android.graphics.Color;
+import android.graphics.Color;  // Esta importación es para la clase Color
 import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.Map;

@@ -1,131 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="16dp">
 
-        <!-- Fila 1: Fecha y Tipo de Vacuna -->
         <TextView
-            android:id="@+id/item_fecha_vacuna"
+            android:id="@+id/tvNombreDueno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dueño"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvNombreMascota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mascota"
+            android:textStyle="bold"
+            android:textColor="#444444" />
+
+        <TextView
+            android:id="@+id/tvNombreVacuna"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre vacuna"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFechaVacuna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="25/12/2023" />
+            android:text="Fecha de aplicacion" />
 
         <TextView
-            android:id="@+id/item_tipo_vacuna"
-            android:layout_width="0dp"
+            android:id="@+id/tvNombreVeterinario"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
             android:textStyle="bold"
-            android:gravity="end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_fecha_vacuna"
-            app:layout_constraintTop_toTopOf="@+id/item_fecha_vacuna"
-            app:layout_constraintBottom_toBottomOf="@+id/item_fecha_vacuna"
-            tools:text="Parvovirus Canino" />
+            android:text="Veterinario" />
 
-        <!-- Fila 2: Dosis y Lote -->
-        <TextView
-            android:id="@+id/label_dosis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Dosis:"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/item_fecha_vacuna"
-            app:layout_constraintTop_toBottomOf="@+id/item_fecha_vacuna" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/item_dosis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textSize="14sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_dosis"
-            app:layout_constraintStart_toEndOf="@+id/label_dosis"
-            tools:text="Primera" />
-
-        <TextView
-            android:id="@+id/label_lote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Lote:"
-            android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_dosis"
-            app:layout_constraintStart_toEndOf="@+id/item_dosis" />
-
-        <TextView
-            android:id="@+id/item_lote"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textSize="14sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_lote"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_lote"
-            tools:text="XYZ12345" />
-
-        <!-- Fila 3: Veterinario -->
-        <TextView
-            android:id="@+id/label_veterinario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Veterinario:"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/label_dosis"
-            app:layout_constraintTop_toBottomOf="@+id/label_dosis" />
-
-        <TextView
-            android:id="@+id/item_veterinario"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textSize="14sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_veterinario"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_veterinario"
-            tools:text="Dr. Juan Pérez" />
-
-        <!-- Fila 4: Observaciones (si existen) -->
-        <TextView
-            android:id="@+id/label_observaciones"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Obs:"
-            android:textSize="12sp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/label_veterinario"
-            app:layout_constraintTop_toBottomOf="@+id/label_veterinario" />
-
-        <TextView
-            android:id="@+id/item_observaciones"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textSize="14sp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_observaciones"
-            app:layout_constraintTop_toTopOf="@+id/label_observaciones"
-            tools:text="Sin reacciones adversas observadas." />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

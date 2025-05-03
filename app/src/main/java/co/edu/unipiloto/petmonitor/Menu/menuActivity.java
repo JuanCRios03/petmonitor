@@ -13,13 +13,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio;
 import co.edu.unipiloto.petmonitor.R;
 import android.widget.RelativeLayout;
@@ -27,8 +24,9 @@ import co.edu.unipiloto.petmonitor.CasosdeUso.zonaSeguraActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.VeterinariosActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.historialUbicacionActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoTiempoRealActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.registrarVacunasActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.RegistrarVacunaActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividadActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.HistorialVacunasActivity;
 
 public class menuActivity extends AppCompatActivity {
 
@@ -38,7 +36,7 @@ public class menuActivity extends AppCompatActivity {
         private String currentUserEmail;
         private String mascotaId; // ← Se agrega para recibirlo por intent
 
-        private RelativeLayout btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines;
+        private RelativeLayout btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +95,14 @@ public class menuActivity extends AppCompatActivity {
 
                 btnRegisterVaccines = findViewById(R.id.btnRegisterVaccines);
                 btnRegisterVaccines.setOnClickListener(v -> {
-                        Intent intent = new Intent(menuActivity.this, registrarVacunasActivity.class);
+                        Intent intent = new Intent(menuActivity.this, RegistrarVacunaActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
+                        startActivity(intent);
+                });
+
+                btnHistorialVaccines = findViewById(R.id.btnHistorialVaccines);
+                btnHistorialVaccines.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, HistorialVacunasActivity.class);
                         intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });

@@ -35,9 +35,6 @@
         <activity
             android:name=".CasosdeUso.historialUbicacionActivity"
             android:exported="false" />
-        <activity
-            android:name=".CasosdeUso.VeterinariosActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -51,12 +48,12 @@
         <activity android:name=".Menu.menuActivity" />
         <activity android:name=".CasosdeUso.zonaSeguraActivity" />
         <activity android:name=".CasosdeUso.MapaZonaSegura" />
+        <activity android:name=".CasosdeUso.VeterinariosActivity" />
+        <activity android:name=".CasosdeUso.HistorialVacunasActivity" />
         <activity
-            android:name=".CasosdeUso.registrarVacunasActivity"
+            android:name=".CasosdeUso.RegistrarVacunaActivity"
             android:exported="false" />
-        <activity
-            android:name=".vacuna.HistorialVacunasActivity"
-            android:exported="false" />
+
         <activity android:name=".MisMascotas" />
         <activity
             android:name=".MainActivity"

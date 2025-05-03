@@ -1,4 +1,4 @@
-package co.edu.unipiloto.petmonitor.vacuna;
+package co.edu.unipiloto.petmonitor.CasosdeUso;
 
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.ServerTimestamp;
@@ -195,4 +195,12 @@ public class Vacuna {
     public void setTimestampRegistro(Date timestampRegistro) {
         this.timestampRegistro = timestampRegistro;
     }
+
+
+    public String getNombre() { return ownerEmail; }
+    public String getNombreMascota() { return petNombre; }
+    public String getTipo() { return tipoVacuna; }
+    public String getFecha() { return fechaVacunacion; }
+
 }
+
