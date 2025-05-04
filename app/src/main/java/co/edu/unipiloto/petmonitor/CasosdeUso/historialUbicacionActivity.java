@@ -95,11 +95,13 @@ public class historialUbicacionActivity extends AppCompatActivity {
 
         class ViewHolder extends RecyclerView.ViewHolder {
             TextView textDireccion, textHora;
+            ImageView iconoBorrar;
 
             public ViewHolder(View view) {
                 super(view);
                 textDireccion = view.findViewById(R.id.textDireccion);
                 textHora = view.findViewById(R.id.textHora);
+                iconoBorrar = view.findViewById(R.id.iconoBorrar); // nuevo
             }
         }
 
@@ -122,6 +124,41 @@ public class historialUbicacionActivity extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
                 holder.textHora.setText(sdf.format(date));
             }
+
+            holder.iconoBorrar.setOnClickListener(v -> {
+                int pos = holder.getAdapterPosition();
+                eliminarUbicacion(pos);
+            });
+        }
+        private void eliminarUbicacion(int position) {
+            Map<String, Object> item = lista.get(position);
+
+            String email = auth.getCurrentUser() != null ? auth.getCurrentUser().getEmail() : null;
+            if (email == null) return;
+
+            db.collection("usuarios")
+                    .whereEqualTo("email", email)
+                    .get()
+                    .addOnSuccessListener(snapshot -> {
+                        if (!snapshot.isEmpty()) {
+                            String userId = snapshot.getDocuments().get(0).getId();
+
+                            db.collection("usuarios")
+                                    .document(userId)
+                                    .collection("mascotas")
+                                    .document(mascotaId)
+                                    .collection("ubicaciones")
+                                    .whereEqualTo("timestamp", item.get("timestamp"))
+                                    .get()
+                                    .addOnSuccessListener(querySnapshot -> {
+                                        for (DocumentSnapshot doc : querySnapshot) {
+                                            doc.getReference().delete();
+                                        }
+                                        lista.remove(position);
+                                        notifyItemRemoved(position);
+                                    });
+                        }
+                    });
         }
 
         @Override

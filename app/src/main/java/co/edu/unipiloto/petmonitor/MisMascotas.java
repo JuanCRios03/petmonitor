@@ -1,7 +1,10 @@
 package co.edu.unipiloto.petmonitor;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -41,10 +44,13 @@ public class MisMascotas extends AppCompatActivity {
             startActivity(intent);
         });
 
-        cargarMascotas();
     }
 
     private void cargarMascotas() {
+        if (layoutMascotas != null) {
+            layoutMascotas.removeAllViews();
+        }
+
         String email = auth.getCurrentUser() != null ? auth.getCurrentUser().getEmail() : null;
         if (email == null) return;
 
@@ -65,9 +71,8 @@ public class MisMascotas extends AppCompatActivity {
                                         Map<String, Object> data = doc.getData();
                                         if (data != null && data.containsKey("nombreMascota")) {
                                             String nombre = data.get("nombreMascota").toString();
-                                            String mascotaId = doc.getId(); // <-- este es el ID que necesitas para acceder a Firestore correctamente
-                                            agregarCardMascota(nombre, mascotaId);
-
+                                            String mascotaId = doc.getId();
+                                            agregarCardMascota(nombre, mascotaId, docId);
                                         }
                                     }
                                 });
@@ -75,16 +80,36 @@ public class MisMascotas extends AppCompatActivity {
                 });
     }
 
-    private void agregarCardMascota(String nombre, String mascotaId) {
+    private void agregarCardMascota(String nombre, String mascotaId, String userId) {
         View card = getLayoutInflater().inflate(R.layout.item_mascota, layoutMascotas, false);
 
         ShapeableImageView imageView = card.findViewById(R.id.mascotaImage);
         TextView nombreView = card.findViewById(R.id.mascotaNombre);
 
-        imageView.setImageResource(R.drawable.add_pet);
         nombreView.setText(nombre);
 
-        // 🔁 Ahora abrimos monitoreoTiempoRealActivity y pasamos el ID correcto
+        // Cargar imagen desde Firestore
+        db.collection("usuarios")
+                .document(userId)
+                .collection("mascotas")
+                .document(mascotaId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String imageBase64 = documentSnapshot.getString("imagenBase64");
+                        if (imageBase64 != null && !imageBase64.isEmpty()) {
+                            byte[] imageBytes = Base64.decode(imageBase64, Base64.DEFAULT);
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                            imageView.setImageBitmap(bitmap);
+                        } else {
+                            imageView.setImageResource(R.drawable.add_pet);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    imageView.setImageResource(R.drawable.add_pet);
+                });
+
         card.setOnClickListener(v -> {
             Intent intent = new Intent(MisMascotas.this, menuActivity.class);
             intent.putExtra("mascotaId", mascotaId);
@@ -94,5 +119,17 @@ public class MisMascotas extends AppCompatActivity {
         layoutMascotas.addView(card);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                .edit()
+                .putString("lastActivity", "MisMascotas")
+                .apply();
+
+        cargarMascotas();
+    }
 }
+
+

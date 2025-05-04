@@ -14,10 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio;
+import co.edu.unipiloto.petmonitor.Login.LoginActivity;
 import co.edu.unipiloto.petmonitor.R;
 import android.widget.RelativeLayout;
 import co.edu.unipiloto.petmonitor.CasosdeUso.zonaSeguraActivity;
@@ -36,7 +38,7 @@ public class menuActivity extends AppCompatActivity {
         private String currentUserEmail;
         private String mascotaId; // ← Se agrega para recibirlo por intent
 
-        private RelativeLayout btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines;
+        private RelativeLayout btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,16 @@ public class menuActivity extends AppCompatActivity {
                         intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
+                btnlogout = findViewById(R.id.btnlogout);
+
+                btnlogout.setOnClickListener(v -> {
+                        FirebaseAuth.getInstance().signOut(); // Cierra la sesión
+                        Intent intent = new Intent(menuActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Limpia el back stack
+                        startActivity(intent);
+                        finish();
+                });
+
 
                 // Obtener email del usuario logueado
                 SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -161,31 +173,63 @@ public class menuActivity extends AppCompatActivity {
                 byte[] imageBytes = baos.toByteArray();
                 String imageBase64 = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-                db.collection("usuarios").document(currentUserEmail)
-                        .update("imagenBase64", imageBase64)
-                        .addOnSuccessListener(aVoid ->
-                                Toast.makeText(this, "Imagen guardada", Toast.LENGTH_SHORT).show()
-                        )
-                        .addOnFailureListener(e ->
-                                Toast.makeText(this, "Error al guardar imagen", Toast.LENGTH_SHORT).show()
-                        );
+                db.collection("usuarios")
+                        .whereEqualTo("email", currentUserEmail)
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                        String userId = queryDocumentSnapshots.getDocuments().get(0).getId();
+
+                                        db.collection("usuarios")
+                                                .document(userId)
+                                                .collection("mascotas")
+                                                .document(mascotaId)
+                                                .update("imagenBase64", imageBase64)
+                                                .addOnSuccessListener(aVoid ->
+                                                        Toast.makeText(this, "Imagen guardada", Toast.LENGTH_SHORT).show()
+                                                )
+                                                .addOnFailureListener(e ->
+                                                        Toast.makeText(this, "Error al guardar imagen", Toast.LENGTH_SHORT).show()
+                                                );
+                                }
+                        })
+                        .addOnFailureListener(e -> {
+                                Toast.makeText(this, "Error al obtener usuario", Toast.LENGTH_SHORT).show();
+                        });
         }
 
+
         private void loadExistingImage() {
-                db.collection("usuarios").document(currentUserEmail).get()
-                        .addOnSuccessListener(documentSnapshot -> {
-                                if (documentSnapshot.exists()) {
-                                        String imageBase64 = documentSnapshot.getString("imagenBase64");
-                                        if (imageBase64 != null && !imageBase64.isEmpty()) {
-                                                byte[] imageBytes = Base64.decode(imageBase64, Base64.DEFAULT);
-                                                Glide.with(this)
-                                                        .load(imageBytes)
-                                                        .into(imageView);
-                                        }
+                db.collection("usuarios")
+                        .whereEqualTo("email", currentUserEmail)
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                        String userId = queryDocumentSnapshots.getDocuments().get(0).getId();
+
+                                        db.collection("usuarios")
+                                                .document(userId)
+                                                .collection("mascotas")
+                                                .document(mascotaId)
+                                                .get()
+                                                .addOnSuccessListener(documentSnapshot -> {
+                                                        if (documentSnapshot.exists()) {
+                                                                String imageBase64 = documentSnapshot.getString("imagenBase64");
+                                                                if (imageBase64 != null && !imageBase64.isEmpty()) {
+                                                                        byte[] imageBytes = Base64.decode(imageBase64, Base64.DEFAULT);
+                                                                        Glide.with(this)
+                                                                                .load(imageBytes)
+                                                                                .into(imageView);
+                                                                }
+                                                        }
+                                                })
+                                                .addOnFailureListener(e ->
+                                                        Toast.makeText(this, "Error al cargar imagen", Toast.LENGTH_SHORT).show()
+                                                );
                                 }
                         })
                         .addOnFailureListener(e ->
-                                Toast.makeText(this, "Error al cargar imagen", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Error al buscar usuario", Toast.LENGTH_SHORT).show()
                         );
         }
 }

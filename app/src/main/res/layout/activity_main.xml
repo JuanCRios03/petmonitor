@@ -7,12 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_img"
+        android:alpha="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
         android:id="@+id/centeredLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -37,9 +50,9 @@
             android:textSize="60sp"
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"
-            tools:ignore="HardcodedText"
             android:layout_marginStart="-20dp"
-            android:layout_marginTop="-80dp"/>
+            android:layout_marginTop="-80dp"
+            tools:ignore="HardcodedText"/>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/home_img"
@@ -48,7 +61,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/home_img"
             app:shapeAppearanceOverlay="@style/RoundedImageViewStyle"
-            android:layout_marginTop="-30dp"/>
+            android:layout_marginTop="-30dp" />
 
         <Button
             android:id="@+id/btnIniciarSesion"
@@ -73,5 +86,5 @@
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+

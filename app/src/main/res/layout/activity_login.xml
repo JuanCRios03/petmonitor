@@ -1,118 +1,134 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#FFFFFF"
-    android:padding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inicia sesión"
-        android:fontFamily="@font/titulos"
-        android:textColor="#000000"
-        android:textSize="60sp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="-10dp"
-        tools:ignore="HardcodedText" />
-
-    <!-- Imagen -->
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/home_img"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="-30dp"
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/login_img"
-        app:shapeAppearanceOverlay="@style/RoundedImageViewStyle"
-        />
+        android:alpha="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Texto de "Cual es tu gmail" -->
-    <TextView
-        android:id="@+id/tvGmailLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cual es tu gmail"
-        android:layout_gravity="left"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:fontFamily="@font/titulos"
-        android:layout_marginBottom="4dp"
-        tools:ignore="HardcodedText" />
-
-    <!-- Campo de correo -->
-    <EditText
-        android:id="@+id/etGmail"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ejemplo@gmail.com"
-        android:drawableEnd="@drawable/ic_arrow_dropdown"
-        android:textColorHint="@color/grayHint"
-        android:fontFamily="@font/titulos"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/rounded_edittext"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"
-        android:textColor="#000000"
-        tools:ignore="HardcodedText" />
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-    <!-- Texto de "Ingresa tu contraseña" -->
-    <TextView
-        android:id="@+id/tvPasswordLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingresa tu contraseña"
-        android:layout_gravity="left"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:fontFamily="@font/titulos"
-        android:layout_marginBottom="4dp"
-        tools:ignore="HardcodedText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-    <!-- Campo de contraseña -->
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Escribe aqui tu contraseña"
-        android:drawableEnd="@drawable/ic_arrow_dropdown"
-        android:textColorHint="@color/grayHint"
-        android:fontFamily="@font/titulos"
-        android:inputType="textPassword"
-        android:background="@drawable/rounded_edittext"
-        android:padding="12dp"
-        android:layout_marginBottom="10dp"
-        android:textColor="#000000"
-        tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicia sesión"
+                android:fontFamily="@font/titulos"
+                android:textColor="#000000"
+                android:textSize="60sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="-10dp"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/home_img"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="-30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/login_img"
+                app:shapeAppearanceOverlay="@style/RoundedImageViewStyle" />
+
+            <TextView
+                android:id="@+id/tvGmailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cual es tu gmail"
+                android:layout_gravity="left"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:fontFamily="@font/titulos"
+                android:layout_marginBottom="4dp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/etGmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ejemplo@gmail.com"
+                android:drawableEnd="@drawable/ic_arrow_dropdown"
+                android:textColorHint="@color/grayHint"
+                android:fontFamily="@font/titulos"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/rounded_edittext"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="#000000"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvPasswordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingresa tu contraseña"
+                android:layout_gravity="left"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:fontFamily="@font/titulos"
+                android:layout_marginBottom="4dp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Escribe aqui tu contraseña"
+                android:drawableEnd="@drawable/ic_eye_closed"
+                android:textColorHint="@color/grayHint"
+                android:fontFamily="@font/titulos"
+                android:inputType="textPassword"
+                android:background="@drawable/rounded_edittext"
+                android:padding="12dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#000000"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="320dp"
+                android:layout_height="80dp"
+                android:text="Iniciar"
+                android:fontFamily="@font/titulos"
+                android:textSize="30sp"
+                android:backgroundTint="@color/greenButton"
+                android:layout_marginTop="8dp"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="320dp"
+                android:layout_height="80dp"
+                android:text="Volver"
+                android:fontFamily="@font/titulos"
+                android:textSize="30sp"
+                android:backgroundTint="@color/redButton"
+                android:layout_marginTop="5dp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
 
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="320dp"
-        android:layout_height="80dp"
-        android:text="Iniciar"
-        android:fontFamily="@font/titulos"
-        android:textSize="30sp"
-        android:backgroundTint="@color/greenButton"
-        android:layout_marginTop="8dp"
-        tools:ignore="HardcodedText" />
-
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="320dp"
-        android:layout_height="80dp"
-        android:text="Volver"
-        android:fontFamily="@font/titulos"
-        android:textSize="30sp"
-        android:backgroundTint="@color/redButton"
-        android:layout_marginTop="5dp"
-        tools:ignore="HardcodedText" />
-</LinearLayout>
 

@@ -1,98 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@android:color/white"
-    android:padding="24dp"
-    android:gravity="top|center_horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- Título principal -->
-    <TextView
-        android:id="@+id/tvTitulo"
+    <!-- Imagen de fondo -->
+    <ImageView
+        android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Continuemos"
-        android:fontFamily="@font/titulos"
-        android:textColor="#000000"
-        android:textSize="50sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="14dp"
-        tools:ignore="HardcodedText" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingresa una contrasena"
-        android:layout_gravity="left"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:fontFamily="@font/titulos"
-        android:layout_marginBottom="4dp"
-        tools:ignore="HardcodedText"  />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/register"
+        android:alpha="0.2"/>
 
-    <EditText
-        android:id="@+id/etPassword"
+    <!-- Contenido encima -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="textPassword"
-        android:hint="contraseña"
-        android:fontFamily="@font/titulos"
-        android:drawableEnd="@drawable/ic_arrow_dropdown"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:textColorHint="@color/grayHint"
-        android:textColor="#000000" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="top|center_horizontal"
+        android:background="@android:color/transparent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Repite la contrasena"
-        android:layout_gravity="left"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:fontFamily="@font/titulos"
-        android:layout_marginBottom="4dp"
-        tools:ignore="HardcodedText"  />
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continuemos"
+            android:fontFamily="@font/titulos"
+            android:textColor="#000000"
+            android:textSize="50sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="14dp"
+            tools:ignore="HardcodedText" />
 
-    <!-- Input repetir contraseña -->
-    <EditText
-        android:id="@+id/etConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_edittext"
-        android:inputType="textPassword"
-        android:hint="contraseña"
-        android:fontFamily="@font/titulos"
-        android:drawableEnd="@drawable/ic_arrow_dropdown"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:textColorHint="@color/grayHint"
-        android:textColor="#000000" />
-    <Button
-        android:id="@+id/btnFinalizarRegistro"
-        android:layout_width="320dp"
-        android:layout_height="80dp"
-        android:text="Registrarme"
-        android:fontFamily="@font/titulos"
-        android:textSize="30sp"
-        android:backgroundTint="@color/greenButton"
-        android:layout_marginTop="20dp"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingresa una contrasena"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="320dp"
-        android:layout_height="80dp"
-        android:text="Volver"
-        android:fontFamily="@font/titulos"
-        android:textSize="30sp"
-        android:backgroundTint="@color/redButton"
-        android:layout_marginTop="5dp"
-        tools:ignore="HardcodedText" />
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPassword"
+            android:hint="contraseña"
+            android:drawableEnd="@drawable/ic_eye_closed"
+            android:fontFamily="@font/titulos"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/grayHint"
+            android:textColor="#000000" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Repite la contrasena"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPassword"
+            android:hint="contraseña"
+            android:fontFamily="@font/titulos"
+            android:drawableEnd="@drawable/ic_eye_closed"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/grayHint"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btnFinalizarRegistro"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:text="Registrarme"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/greenButton"
+            android:layout_marginTop="20dp"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnVolver"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:text="Volver"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/redButton"
+            android:layout_marginTop="5dp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</FrameLayout>
 
 
 

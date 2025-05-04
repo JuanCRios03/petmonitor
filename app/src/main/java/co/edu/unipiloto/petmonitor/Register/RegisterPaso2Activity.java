@@ -2,11 +2,13 @@ package co.edu.unipiloto.petmonitor.Register;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +44,31 @@ public class RegisterPaso2Activity extends AppCompatActivity {
         apellido = getIntent().getStringExtra("apellido");
         email = getIntent().getStringExtra("email");
 
+        final boolean[] isPasswordVisible = {false};
+        final boolean[] isConfirmVisible = {false};
+
+        etPassword.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                int drawableEnd = etPassword.getCompoundDrawables()[2].getBounds().width();
+                if (event.getRawX() >= (etPassword.getRight() - drawableEnd)) {
+                    togglePasswordVisibility(etPassword, isPasswordVisible, R.drawable.ic_eye_open, R.drawable.ic_eye_closed);
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        etConfirmPassword.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                int drawableEnd = etConfirmPassword.getCompoundDrawables()[2].getBounds().width();
+                if (event.getRawX() >= (etConfirmPassword.getRight() - drawableEnd)) {
+                    togglePasswordVisibility(etConfirmPassword, isConfirmVisible, R.drawable.ic_eye_open, R.drawable.ic_eye_closed);
+                    return true;
+                }
+            }
+            return false;
+        });
+
         btnFinalizarRegistro.setOnClickListener(v -> {
             String password = etPassword.getText().toString().trim();
             String confirmPassword = etConfirmPassword.getText().toString().trim();
@@ -67,23 +94,35 @@ public class RegisterPaso2Activity extends AppCompatActivity {
                             usuario.put("email", email);
 
                             db.collection("usuarios")
-                                    .document(uid) // ✅ Corregido: usar UID
+                                    .document(uid)
                                     .set(usuario)
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show();
-
-                                        Intent intent = new Intent(this, RegisterPaso3Activity.class);
-                                        startActivity(intent);
+                                        startActivity(new Intent(this, RegisterPaso3Activity.class));
                                         finish();
                                     })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    });
+                                    .addOnFailureListener(e -> Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                         } else {
                             Toast.makeText(this, "Error al registrar usuario: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
         });
     }
+
+    private void togglePasswordVisibility(EditText editText, boolean[] isVisible, int iconVisible, int iconInvisible) {
+        int selection = editText.getSelectionEnd();
+        if (isVisible[0]) {
+            editText.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconInvisible, 0);
+        } else {
+            editText.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconVisible, 0);
+        }
+        isVisible[0] = !isVisible[0];
+        editText.setSelection(selection);
+
+        editText.setTypeface(ResourcesCompat.getFont(this, R.font.titulos));
+    }
 }
+
 

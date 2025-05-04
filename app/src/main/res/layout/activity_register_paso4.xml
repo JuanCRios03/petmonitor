@@ -1,60 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white"
-    android:padding="24dp"
-    android:gravity="top|center_horizontal">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cual es su edad"
-        android:layout_gravity="left"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:fontFamily="@font/titulos"
-        android:layout_marginBottom="4dp"
-        tools:ignore="HardcodedText"   />
-
-    <EditText
-        android:id="@+id/spinnerEdad"
+    <!-- Fondo con imagen semitransparente -->
+    <ImageView
+        android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="5 años"
-        android:fontFamily="@font/titulos"
-        android:drawableEnd="@drawable/ic_arrow_dropdown"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:textColorHint="@color/grayHint"
-        android:textColor="#000000"
-        tools:ignore="HardcodedText" />
+        android:layout_height="match_parent"
+        android:src="@drawable/register"
+        android:scaleType="centerCrop"
+        android:alpha="0.2"/>
 
-    <Button
-        android:id="@+id/btnAgregarEdad"
-        android:layout_width="320dp"
-        android:layout_height="80dp"
-        android:text="Agregar"
-        android:fontFamily="@font/titulos"
-        android:textSize="30sp"
-        android:backgroundTint="@color/greenButton"
-        android:layout_marginTop="20dp"
-        tools:ignore="HardcodedText" />
+    <!-- Contenido -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="top|center_horizontal"
+        android:background="@android:color/transparent">
 
-    <Button
-        android:id="@+id/btnCancelar"
-        android:layout_width="320dp"
-        android:layout_height="80dp"
-        android:text="Cancelar"
-        android:fontFamily="@font/titulos"
-        android:textSize="30sp"
-        android:backgroundTint="@color/redButton"
-        android:layout_marginTop="5dp"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cual es su edad"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:fontFamily="@font/titulos"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/spinnerEdad"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="5 años"
+            android:fontFamily="@font/titulos"
+            android:drawableEnd="@drawable/ic_arrow_dropdown"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/grayHint"
+            android:textColor="#000000"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnAgregarEdad"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:text="Agregar"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/greenButton"
+            android:layout_marginTop="20dp"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:text="Cancelar"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/redButton"
+            android:layout_marginTop="5dp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</FrameLayout>
 
 

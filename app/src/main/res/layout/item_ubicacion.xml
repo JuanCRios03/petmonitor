@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="#EFEFEF"
+    android:background="#DFFFD6"
     android:padding="12dp"
     android:layout_marginBottom="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textDireccion"
-        android:text="Dirección aquí"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+<TextView
+android:id="@+id/textDireccion"
+android:text="Dirección aquí"
+android:textColor="#000000"
+android:textSize="16sp"
+android:layout_width="match_parent"
+android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/textHora"
-        android:text="08:19"
-        android:textColor="#555555"
-        android:textSize="14sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp" />
-</LinearLayout>
+<TextView
+android:id="@+id/textHora"
+android:text="08:19"
+android:textColor="#555555"
+android:textSize="14sp"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="4dp" />
+
+<ImageView
+android:id="@+id/iconoBorrar"
+android:layout_width="24dp"
+android:layout_height="24dp"
+android:src="@drawable/trash"
+android:layout_gravity="right"
+android:contentDescription="Eliminar" />
+    </LinearLayout>
