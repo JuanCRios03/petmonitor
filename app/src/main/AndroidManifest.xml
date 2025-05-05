@@ -40,6 +40,9 @@
         <activity
             android:name=".CasosdeUso.historialUbicacionActivity"
             android:exported="false" />
+        <activity
+            android:name=".CasosdeUso.editarPerfilActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -59,7 +62,7 @@
             android:name=".CasosdeUso.RegistrarVacunaActivity"
             android:exported="false" />
         <activity
-            android:name=".MisMascotas"
+            android:name=".Menu.MisMascotas"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

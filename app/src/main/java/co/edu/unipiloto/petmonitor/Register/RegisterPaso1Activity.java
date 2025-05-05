@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import co.edu.unipiloto.petmonitor.Login.LoginActivity;
 import co.edu.unipiloto.petmonitor.R;
 
 public class RegisterPaso1Activity extends AppCompatActivity {
@@ -42,6 +44,12 @@ public class RegisterPaso1Activity extends AppCompatActivity {
             intent.putExtra("email", email);
             startActivity(intent);
         });
+        TextView tvGoToRegister = findViewById(R.id.tvGoToLogin);
+        tvGoToRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterPaso1Activity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
 

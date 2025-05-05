@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MisMascotas">
+    tools:context=".Menu.MisMascotas">
 
     <ScrollView
         android:layout_width="0dp"

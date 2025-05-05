@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/ivMascota"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen de la mascota" />
+
+        <EditText
+            android:id="@+id/etEdad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/titulos"
+            android:hint="Edad"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etPeso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/titulos"
+            android:hint="Peso"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/btnGuardarCambios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/titulos"
+            android:text="Guardar cambios"
+            android:backgroundTint="@color/greenButton"
+            android:layout_marginTop="16dp" />
+        <Button
+            android:id="@+id/btnRestablecerContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/titulos"
+            android:text="Enviar correo para restablecer contraseña"
+            android:backgroundTint="@color/blueButton"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>
+
+

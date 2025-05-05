@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import co.edu.unipiloto.petmonitor.CasosdeUso.editarPerfilActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio;
 import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividad;
 import co.edu.unipiloto.petmonitor.Login.LoginActivity;
@@ -37,7 +39,7 @@ public class menuActivity extends AppCompatActivity {
         private String currentUserEmail;
         private String mascotaId; // ← Se agrega para recibirlo por intent
 
-        private RelativeLayout btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout;
+        private RelativeLayout btnEditarPerfil, btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,13 @@ public class menuActivity extends AppCompatActivity {
                         finish();
                         return;
                 }
+
+                btnEditarPerfil = findViewById(R.id.btnEditarPerfil);
+                btnEditarPerfil.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, editarPerfilActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
+                        startActivity(intent);
+                });
 
                 btnRegisterSafeZone = findViewById(R.id.btnRegisterSafeZone);
                 btnRegisterSafeZone.setOnClickListener(v -> {

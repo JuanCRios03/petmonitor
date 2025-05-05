@@ -4,16 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Fondo con imagen semitransparente -->
-    <ImageView
-        android:id="@+id/backgroundImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/register"
-        android:scaleType="centerCrop"
-        android:alpha="0.2"/>
-
-    <!-- Contenido -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

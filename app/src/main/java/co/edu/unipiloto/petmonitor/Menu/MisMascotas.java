@@ -1,4 +1,4 @@
-package co.edu.unipiloto.petmonitor;
+package co.edu.unipiloto.petmonitor.Menu;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 import java.util.Map;
 
-import co.edu.unipiloto.petmonitor.Menu.menuActivity;
+import co.edu.unipiloto.petmonitor.R;
 
 public class MisMascotas extends AppCompatActivity {
 

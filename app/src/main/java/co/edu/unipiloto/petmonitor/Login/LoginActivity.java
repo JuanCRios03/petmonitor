@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +16,9 @@ import androidx.core.content.res.ResourcesCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import co.edu.unipiloto.petmonitor.MisMascotas;
+import co.edu.unipiloto.petmonitor.Menu.MisMascotas;
 import co.edu.unipiloto.petmonitor.R;
+import co.edu.unipiloto.petmonitor.Register.RegisterPaso1Activity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,13 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         // Verifica si ya hay un usuario logueado
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            // El usuario ya inició sesión previamente, lo llevamos directo al menú principal
             startActivity(new Intent(this, MisMascotas.class));
-            finish(); // Cerramos LoginActivity para que no vuelva atrás
+            finish();
             return;
         }
 
-        // Si no está logueado, mostramos el login
         setContentView(R.layout.activity_login);
 
         etGmail = findViewById(R.id.etGmail);
@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         final boolean[] isPasswordVisible = {false};
-        final boolean[] isConfirmVisible = {false};
 
         etPassword.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -73,8 +72,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         btnBack.setOnClickListener(v -> finish());
-    }
 
+        // Configurar el TextView para redirigir al registro
+        TextView tvGoToRegister = findViewById(R.id.tvGoToRegister);
+        tvGoToRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterPaso1Activity.class);
+            startActivity(intent);
+        });
+    }
 
     private void loginUser(String email, String password) {
         auth.signInWithEmailAndPassword(email, password)
@@ -104,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
     private void togglePasswordVisibility(EditText editText, boolean[] isVisible, int iconVisible, int iconInvisible) {
         int selection = editText.getSelectionEnd();
         if (isVisible[0]) {
