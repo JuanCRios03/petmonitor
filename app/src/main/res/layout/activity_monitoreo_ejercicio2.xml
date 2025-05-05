@@ -128,21 +128,14 @@
                 android:layout_marginEnd="8dp" />
         </LinearLayout>
 
-        <!-- Botón -->
         <Button
             android:id="@+id/btnVolverInicio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VOLVER AL INICIO"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#00FFB0"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/rounded_button" />
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:text="Volver"
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:backgroundTint="@color/greenButton"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 </ScrollView>

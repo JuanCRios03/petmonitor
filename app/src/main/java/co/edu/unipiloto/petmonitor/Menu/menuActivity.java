@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -19,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio;
+import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividad;
 import co.edu.unipiloto.petmonitor.Login.LoginActivity;
 import co.edu.unipiloto.petmonitor.R;
 import android.widget.RelativeLayout;
@@ -27,7 +27,6 @@ import co.edu.unipiloto.petmonitor.CasosdeUso.VeterinariosActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.historialUbicacionActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoTiempoRealActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.RegistrarVacunaActivity;
-import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividadActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.HistorialVacunasActivity;
 
 public class menuActivity extends AppCompatActivity {
@@ -83,7 +82,7 @@ public class menuActivity extends AppCompatActivity {
 
                 btnActivityReport = findViewById(R.id.btnActivityReport);
                 btnActivityReport.setOnClickListener(v -> {
-                        Intent intent = new Intent(menuActivity.this, reporteActividadActivity.class);
+                        Intent intent = new Intent(menuActivity.this, reporteActividad.class);
                         intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
