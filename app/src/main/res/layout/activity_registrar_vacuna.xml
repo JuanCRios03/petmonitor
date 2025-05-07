@@ -2,150 +2,158 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F6F8"
     android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
+        <!-- Botón Home -->
         <Button
             android:id="@+id/btnHome"
-            android:layout_width="55dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Home"
-            android:textSize="14dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:backgroundTint="#F0D0D0"
-            android:textColor="#494249"
-            android:layout_margin="8dp"
-            android:fontFamily="@font/titulos"
-            android:padding="6dp"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#DDC6F7"
+            android:textColor="#3E3E3E"
+            android:textStyle="bold"
+            android:paddingHorizontal="16dp"
+            android:fontFamily="@font/titulos"/>
 
+        <!-- Contenedor Principal -->
         <LinearLayout
             android:id="@+id/layoutSafeZone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center_horizontal"
             android:layout_below="@id/btnHome"
-            android:background="#F9F9F9">
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:elevation="4dp"
+            android:gravity="center_horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registro de vacunas"
-                android:textSize="25dp"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
+                android:text="Registro de Vacunas"
+                android:textSize="22sp"
+                android:textColor="#333333"
                 android:fontFamily="@font/titulos"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgMascota"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:src="@drawable/perro"
                 android:layout_marginBottom="16dp"
-                android:layout_marginTop="-30dp" />
-
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.Corner.Full"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selecciona una de sus mascotas"
+                android:text="Selecciona una de tus mascotas"
                 android:textSize="16sp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/titulos"
-                android:gravity="center" />
+                android:textColor="#555555"
+                android:layout_marginBottom="4dp"/>
+
             <Spinner
                 android:id="@+id/spinnerMascotas"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:hint="Selecciona una mascota" />
+                android:backgroundTint="#D0D0D0"
+                android:layout_marginBottom="12dp" />
 
+            <!-- Campos de entrada -->
             <EditText
                 android:id="@+id/fechaVacunacion"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
                 android:hint="Fecha de Vacunación"
+                android:drawableEnd="@drawable/ic_calendar"
                 android:focusable="false"
                 android:clickable="true"
-                android:fontFamily="@font/titulos"
-                android:gravity="center"
-                android:paddingVertical="12dp" />
+                android:inputType="none"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_bg"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titulos"/>
 
             <EditText
                 android:id="@+id/tipoVacuna"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
                 android:hint="Tipo de Vacuna"
-                android:gravity="center"
-                android:fontFamily="@font/titulos"
                 android:inputType="text"
-                android:paddingVertical="12dp" />
+                android:padding="12dp"
+                android:background="@drawable/edit_text_bg"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titulos"/>
 
             <EditText
                 android:id="@+id/dosis"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:gravity="center"
                 android:hint="Dosis"
                 android:inputType="text"
-                android:fontFamily="@font/titulos"
-                android:paddingVertical="12dp" />
+                android:padding="12dp"
+                android:background="@drawable/edit_text_bg"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titulos"/>
 
             <EditText
                 android:id="@+id/lote"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:gravity="center"
                 android:hint="Lote"
                 android:inputType="text"
-                android:fontFamily="@font/titulos"
-                android:paddingVertical="12dp" />
+                android:padding="12dp"
+                android:background="@drawable/edit_text_bg"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titulos"/>
 
             <EditText
                 android:id="@+id/veterinario"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:gravity="center"
                 android:hint="Veterinario"
                 android:inputType="text"
-                android:fontFamily="@font/titulos"
-                android:paddingVertical="12dp" />
+                android:padding="12dp"
+                android:background="@drawable/edit_text_bg"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titulos"/>
 
             <EditText
                 android:id="@+id/observaciones"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:gravity="center"
                 android:hint="Observaciones"
                 android:inputType="text"
-                android:fontFamily="@font/titulos"
-                android:paddingVertical="12dp" />
+                android:padding="12dp"
+                android:background="@drawable/edit_text_bg"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/titulos"/>
 
             <Button
                 android:id="@+id/btnGuardar"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Guardar Vacuna"
-                android:layout_marginTop="24dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#75DC5E"
-                android:fontFamily="@font/titulos"
-                android:textColor="#FFFFFF" />
-
+                android:backgroundTint="#68C77D"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:paddingVertical="12dp"
+                android:fontFamily="@font/titulos" />
         </LinearLayout>
-
     </RelativeLayout>
 </ScrollView>

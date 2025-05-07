@@ -1,58 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFFFFF"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:text="Historial de Ubicación"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:fontFamily="@font/titulos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="12dp" />
-
-    <ImageView
-        android:id="@+id/imageUbicacion"
-        android:src="@drawable/perro_feliz"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:scaleType="fitCenter"
-        android:layout_marginBottom="12dp" />
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#E3F2FD">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
-        android:background="#DFFFD6">
-
+        <!-- Título más abajo -->
         <TextView
-            android:text="Dirección"
+            android:text="Historial de Ubicación"
+            android:textSize="35sp"
             android:textStyle="bold"
-            android:textSize="24sp"
-            android:background="#DFFFD6"
+            android:textColor="#333333"
+            android:fontFamily="@font/titulos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginBottom="32dp"
+            android:shadowColor="#AAAAAA"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3"
+            android:layout_marginTop="40dp"/>
+
+        <!-- Imagen de mascota con borde redondeado y sombra sutil -->
+        <ImageView
+            android:id="@+id/imageUbicacion"
+            android:src="@drawable/perro_feliz"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="24dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen de mascota feliz"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/border_image"/>
+
+        <!-- Título de la sección Dirección centrado con fondo redondeado -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_background"
+            android:padding="8dp"
+            android:gravity="center">
+
+            <TextView
+                android:text="Dirección"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:textColor="#000000"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <!-- RecyclerView para mostrar las ubicaciones -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerUbicaciones"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:fontFamily="@font/titulos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp"/>
+
+        <!-- Pie de página con margen adicional -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="24dp">
+            <TextView
+                android:text="Última actualización: 05/05/2025"
+                android:textSize="14sp"
+                android:textColor="#888888"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"/>
+        </LinearLayout>
 
     </LinearLayout>
 
-    <!-- Lista del historial -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerUbicaciones"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/titulos"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
-</LinearLayout>
+</ScrollView>
+
+
+
 

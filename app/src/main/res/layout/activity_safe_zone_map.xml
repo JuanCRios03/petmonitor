@@ -10,35 +10,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- Botón para volver -->
+    <!-- Botón para volver (verde) en la parte inferior, encima de los otros botones -->
     <Button
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="16dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+    android:backgroundTint="#75DC5E"
+    android:textColor="#FFFFFF"
+    android:fontFamily="@font/titulos" />
 
-    <!-- Botón para eliminar la zona segura -->
+    <!-- Botón para eliminar la zona segura (rojo) en la parte inferior izquierda -->
     <Button
         android:id="@+id/btnEliminarZonaSegura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Eliminar Zona Segura"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:layout_toLeftOf="@id/btnVolver" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#F44336"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/titulos" />
 
-    <!-- Botón para simular movimiento -->
+    <!-- Botón para simular movimiento (azul) en la parte inferior derecha -->
     <Button
         android:id="@+id/btnSimularMovimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Simular Movimiento"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/titulos" />
 
 </RelativeLayout>

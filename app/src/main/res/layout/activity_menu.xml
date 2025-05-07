@@ -17,19 +17,19 @@
             android:layout_width="match_parent"
             android:layout_height="308dp"
             android:layout_marginBottom="34dp"
-            android:background="#29F29B"
+            android:background="#5FFFC1"
             android:foreground="?attr/selectableItemBackground">
 
             <!-- TextView centrado vertical y horizontalmente -->
             <TextView
-                android:layout_width="234dp"
+                android:layout_width="241dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/titulos"
+                android:gravity="center"
                 android:text="+ Agrega tu Imagen"
                 android:textColor="@android:color/black"
                 android:textSize="30sp"
-                android:gravity="center"
                 tools:ignore="HardcodedText" />
 
         </FrameLayout>

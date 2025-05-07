@@ -3,29 +3,74 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#E3F2FD">
 
-    <TextView
-        android:id="@+id/tvTituloVacunas"
+    <!-- Cuadro para el título -->
+    <LinearLayout
+        android:id="@+id/layoutTituloVacunas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Historial de vacunas"
-        android:textSize="25sp"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:fontFamily="@font/titulos"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
+        android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp">
 
+        <TextView
+            android:id="@+id/tvTituloVacunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Historial de vacunas"
+            android:textSize="26sp"
+            android:gravity="center"
+            android:fontFamily="@font/titulos"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <!-- Imagen con bordes redondeados -->
+    <ImageView
+        android:id="@+id/imagenVacunas"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:src="@drawable/mi_imagen"
+    android:scaleType="centerCrop"
+    android:contentDescription="Imagen de vacunas"
+    android:background="@drawable/borde_redondeado"
+    android:outlineProvider="background"
+    android:clipToOutline="true"
+    android:elevation="4dp"
+    app:layout_constraintTop_toBottomOf="@id/layoutTituloVacunas"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp"
+    android:layout_marginBottom="16dp" />
+
+    <!-- RecyclerView debajo de la imagen -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewVacunas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloVacunas"
+        app:layout_constraintTop_toBottomOf="@id/imagenVacunas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#E3F2FD"
+        android:elevation="4dp"
+        android:padding="8dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
 

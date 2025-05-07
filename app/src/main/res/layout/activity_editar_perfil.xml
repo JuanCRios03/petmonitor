@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#E3F2FD"> <!-- Azul claro -->
 
     <LinearLayout
         android:orientation="vertical"
@@ -10,48 +11,98 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
 
+        <!-- Título -->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Perfil de Mascota"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/titulos"
+            android:textColor="#000000"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Imagen de la mascota sin sombra -->
         <ImageView
             android:id="@+id/ivMascota"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="32dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Imagen de la mascota" />
+            android:src="@drawable/amor"
+            android:contentDescription="Imagen de la mascota"
+            android:background="#E3F2FD"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:clipToOutline="true"
+            android:outlineProvider="background" />
 
+        <!-- Campo Edad -->
         <EditText
             android:id="@+id/etEdad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/titulos"
             android:hint="Edad"
-            android:inputType="number" />
+            android:textColorHint="#A0A0A0"
+            android:fontFamily="@font/titulos"
+            android:inputType="number"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp" />
 
+        <!-- Campo Peso -->
         <EditText
             android:id="@+id/etPeso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/titulos"
             android:hint="Peso"
+            android:textColorHint="#A0A0A0"
+            android:fontFamily="@font/titulos"
             android:inputType="numberDecimal"
-            android:layout_marginTop="8dp" />
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp" />
 
+        <!-- Botón Guardar -->
         <Button
             android:id="@+id/btnGuardarCambios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/titulos"
             android:text="Guardar cambios"
+            android:fontFamily="@font/titulos"
             android:backgroundTint="@color/greenButton"
-            android:layout_marginTop="16dp" />
+            android:textColor="#000000"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:padding="12dp"
+            android:elevation="4dp" />
+
+        <!-- Botón Restablecer contraseña -->
         <Button
             android:id="@+id/btnRestablecerContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/titulos"
             android:text="Enviar correo para restablecer contraseña"
+            android:fontFamily="@font/titulos"
             android:backgroundTint="@color/blueButton"
-            android:layout_marginTop="16dp" />
+            android:textColor="#000000"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:padding="12dp"
+            android:elevation="4dp" />
+
     </LinearLayout>
 </ScrollView>
+
+
+
 
 
