@@ -1,4 +1,4 @@
-package co.edu.unipiloto.petmonitor.CasosdeUso;
+package co.edu.unipiloto.petmonitor.Tests;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio2;
 import co.edu.unipiloto.petmonitor.R;
 
 public class TesterMonitoreoActivity extends AppCompatActivity {
