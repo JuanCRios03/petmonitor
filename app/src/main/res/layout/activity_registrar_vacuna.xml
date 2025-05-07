@@ -55,8 +55,7 @@
                 android:src="@drawable/perro"
                 android:layout_marginBottom="16dp"
                 android:scaleType="centerCrop"
-                android:layout_gravity="center"
-                android:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.Corner.Full"/>
+                android:layout_gravity="center"/>
 
             <TextView
                 android:layout_width="wrap_content"

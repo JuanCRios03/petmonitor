@@ -107,11 +107,20 @@
         </LinearLayout>
 
         <!-- Resultados -->
+
+        <TextView
+            android:id="@+id/txtResultados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnConsultar"
             android:layout_width="280dp"
             android:layout_height="76dp"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="120dp"
             android:backgroundTint="@color/greenButton"
             android:fontFamily="@font/titulos"
             android:padding="16dp"
