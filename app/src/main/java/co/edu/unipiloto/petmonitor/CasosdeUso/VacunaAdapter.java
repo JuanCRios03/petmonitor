@@ -33,8 +33,8 @@ public class VacunaAdapter extends RecyclerView.Adapter<VacunaAdapter.VacunaView
 
         holder.tvNombreDueno.setText("Correo del Dueño: " + vacuna.getNombre());
         holder.tvNombreMascota.setText("Mascota: " + vacuna.getNombreMascota());
-        holder.tvNombreVacuna.setText("Vacuna: " + vacuna.getTipo());
-        holder.tvFechaVacuna.setText("Fecha: " + vacuna.getFecha());
+        holder.tvNombreVacuna.setText("Nombre de la Vacuna: " + vacuna.getTipo());
+        holder.tvFechaVacuna.setText("Fecha de aplicacion: " + vacuna.getFecha());
         holder.tvNombreVeterinario.setText("Veterinario: " + vacuna.getVeterinario());
     }
 

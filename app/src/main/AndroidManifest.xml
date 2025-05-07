@@ -73,13 +73,26 @@
             android:name=".Tests.TesterMonitoreoActivity"
             android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".Tests.ubicacionTiempoRealTestActivity"
             android:exported="false"/>
         <activity
             android:name=".Tests.historialUbicacionTestActivity"
             android:exported="false"/>
+
         <activity
-            android:name=".Tests.ubicacionTiempoRealTestActivity"
+            android:name=".Tests.zonaSeguraTestActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".Tests.VeterinariosTestActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".Tests.RegistrarVacunaTestActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
