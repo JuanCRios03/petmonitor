@@ -28,6 +28,14 @@
         <item>Única</item>
         <item>Otra</item>
     </string-array>
+
+    <string-array name="frecuencias_array">
+        <item>Cada 4 horas</item>
+        <item>Cada 6 horas</item>
+        <item>Cada 8 horas</item>
+        <item>Diariamente</item>
+    </string-array>
+
     */
 
     Ejemplo en colors.xml:

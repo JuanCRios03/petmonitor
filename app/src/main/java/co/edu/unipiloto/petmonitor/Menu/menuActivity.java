@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Base64;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import co.edu.unipiloto.petmonitor.CasosdeUso.HistorialTratamientosActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.RegistrarTratamientoActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.editarPerfilActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio;
 import co.edu.unipiloto.petmonitor.CasosdeUso.reporteActividad;
@@ -30,6 +34,7 @@ import co.edu.unipiloto.petmonitor.CasosdeUso.historialUbicacionActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoTiempoRealActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.RegistrarVacunaActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.HistorialVacunasActivity;
+import co.edu.unipiloto.petmonitor.Tests.RegistrarTratamientoTestActivity;
 
 public class menuActivity extends AppCompatActivity {
 
@@ -39,7 +44,7 @@ public class menuActivity extends AppCompatActivity {
         private String currentUserEmail;
         private String mascotaId; // ← Se agrega para recibirlo por intent
 
-        private RelativeLayout btnEditarPerfil, btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout;
+        private RelativeLayout btnEditarPerfil, btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout, btnRegistrarTratamiento, btnHistorialTratamiento;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +121,24 @@ public class menuActivity extends AppCompatActivity {
                         intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });
-                btnlogout = findViewById(R.id.btnlogout);
 
+
+                btnRegistrarTratamiento = findViewById(R.id.btnRegistrarTratamiento);
+                btnRegistrarTratamiento.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, RegistrarTratamientoActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
+                        startActivity(intent);
+                });
+
+                btnHistorialTratamiento = findViewById(R.id.btnHistorialTratamiento);
+                btnHistorialTratamiento.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, HistorialTratamientosActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
+                        startActivity(intent);
+                });
+
+
+                btnlogout = findViewById(R.id.btnlogout);
                 btnlogout.setOnClickListener(v -> {
                         FirebaseAuth.getInstance().signOut(); // Cierra la sesión
                         Intent intent = new Intent(menuActivity.this, LoginActivity.class);
@@ -152,6 +173,12 @@ public class menuActivity extends AppCompatActivity {
 
                 // Cargar imagen existente
                 loadExistingImage();
+
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                        startActivity(intent);
+                }*/
+
         }
 
         private void openImageChooser() {
