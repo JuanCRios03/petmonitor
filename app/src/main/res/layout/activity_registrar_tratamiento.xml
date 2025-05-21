@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFFFFF">
 
     <LinearLayout
@@ -10,15 +11,15 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/de_nuevo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recordatorio de Medicación"
+            android:text="Recordatorio de medicacion"
+            android:fontFamily="@font/titulos"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:paddingBottom="16dp" />
-
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,25 +99,28 @@
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginTop="12dp"/>
-
         <Button
             android:id="@+id/btnGuardarTratamiento"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
             android:text="Guardar Tratamiento"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#00C389"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_button_green" />
-
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/greenButton"
+            android:layout_marginTop="30dp"
+            tools:ignore="HardcodedText" />
         <Button
             android:id="@+id/btnVolver"
+            android:layout_width="320dp"
+            android:layout_height="80dp"
             android:text="Volver"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/rounded_button_red"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
+            android:fontFamily="@font/titulos"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/redButton"
+            android:layout_marginTop="10dp"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 </ScrollView>

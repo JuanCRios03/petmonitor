@@ -22,9 +22,14 @@
 
     <Button
         android:id="@+id/btnVerHistorial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ver Historial de Cumplimientos"
-        android:layout_marginTop="8dp"/>
+        android:layout_width="320dp"
+        android:layout_height="80dp"
+        android:text="Ver historial"
+        android:fontFamily="@font/titulos"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/greenButton"
+        android:layout_marginTop="30dp"
+        tools:ignore="HardcodedText" />
 </LinearLayout>
 
