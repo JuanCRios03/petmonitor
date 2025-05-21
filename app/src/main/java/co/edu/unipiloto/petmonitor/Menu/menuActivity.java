@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Base64;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,6 +19,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import co.edu.unipiloto.petmonitor.CasosdeUso.HistorialTratamientosActivity;
+import co.edu.unipiloto.petmonitor.CasosdeUso.PetHealthProfileActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.RegistrarTratamientoActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.editarPerfilActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoEjercicio;
@@ -34,7 +33,6 @@ import co.edu.unipiloto.petmonitor.CasosdeUso.historialUbicacionActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.monitoreoTiempoRealActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.RegistrarVacunaActivity;
 import co.edu.unipiloto.petmonitor.CasosdeUso.HistorialVacunasActivity;
-import co.edu.unipiloto.petmonitor.Tests.RegistrarTratamientoTestActivity;
 
 public class menuActivity extends AppCompatActivity {
 
@@ -44,7 +42,7 @@ public class menuActivity extends AppCompatActivity {
         private String currentUserEmail;
         private String mascotaId; // ← Se agrega para recibirlo por intent
 
-        private RelativeLayout btnEditarPerfil, btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout, btnRegistrarTratamiento, btnHistorialTratamiento;
+        private RelativeLayout btnEditarPerfil, btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout, btnRegistrarTratamiento, btnHistorialTratamiento, btnSaludMascota,btnSaludHistoriaMascota;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +131,12 @@ public class menuActivity extends AppCompatActivity {
                 btnHistorialTratamiento = findViewById(R.id.btnHistorialTratamiento);
                 btnHistorialTratamiento.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, HistorialTratamientosActivity.class);
+                        intent.putExtra("mascotaId", mascotaId);
+                        startActivity(intent);
+                });
+                btnSaludMascota = findViewById(R.id.btnSaludMascota);
+                btnSaludMascota.setOnClickListener(v -> {
+                        Intent intent = new Intent(menuActivity.this, PetHealthProfileActivity.class);
                         intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });

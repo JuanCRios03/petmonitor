@@ -49,6 +49,12 @@
         <activity
             android:name=".CasosdeUso.editarPerfilActivity"
             android:exported="false" />
+        <activity
+            android:name=".CasosdeUso.PetHealthProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CasosdeUso.HistorialSaludActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
