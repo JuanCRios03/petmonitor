@@ -25,6 +25,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".CasosdeUso.AgregarCliente"
+            android:exported="false" />
+        <activity
+            android:name=".CasosdeUso.MisClientes"
+            android:exported="false" />
+        <activity
             android:name=".CasosdeUso.MenuVeterinario"
             android:exported="false" />
         <activity

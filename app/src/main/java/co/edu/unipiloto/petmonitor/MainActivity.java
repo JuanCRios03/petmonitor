@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import co.edu.unipiloto.petmonitor.CasosdeUso.MenuVeterinario;
+import co.edu.unipiloto.petmonitor.CasosdeUso.MisClientes;
 import co.edu.unipiloto.petmonitor.Login.LoginActivity;
 import co.edu.unipiloto.petmonitor.Menu.MisMascotas;
 import co.edu.unipiloto.petmonitor.Menu.menuActivity;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (lastActivity) {
                 case "MisClientes":
-                    intent = new Intent(this, MisMascotas.class);
+                    intent = new Intent(this, MisClientes.class);
                     break;
                 case "MisMascotas":
                     intent = new Intent(this, MisMascotas.class);

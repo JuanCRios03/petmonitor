@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import co.edu.unipiloto.petmonitor.CasosdeUso.MenuVeterinario;
+import co.edu.unipiloto.petmonitor.CasosdeUso.MisClientes;
 import co.edu.unipiloto.petmonitor.Menu.MisMascotas;
 import co.edu.unipiloto.petmonitor.R;
 import co.edu.unipiloto.petmonitor.Register.RegisterPaso1Activity;
@@ -97,14 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                             showToast("Inicio de sesión exitoso.");
                             userID = auth.getCurrentUser().getUid();
                             checkIfUserIsVeterinarian();
-                            if (isUserVeterinarian) {
-                                startActivity(new Intent(this, MenuVeterinario.class));
-                                finish();
-                            } else {
-                                startActivity(new Intent(this, MisMascotas.class));
-                                finish();
-                            }
-
                         }
                     } else {
                         Log.e("LoginError", "Error: ", task.getException());
@@ -140,21 +133,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkIfUserIsVeterinarian() {
+        System.out.println("check login");
         db.collection("usuarios").document(userID).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         Boolean esVeterinario = documentSnapshot.getBoolean("esVeterinario");
                         if (esVeterinario != null && esVeterinario) {
-                            isUserVeterinarian = true;
-                            System.out.println("es veterinario");
-                            Intent intent = new Intent(this, MenuVeterinario.class);
-                            intent.putExtra("isUserVeterinarian", isUserVeterinarian);
-                            startActivity(intent);
+                            System.out.println("si es veterinario");
+                            System.out.println("Nos fuimos a mis clientes");
+                            startActivity(new Intent(this, MisClientes.class));
                             finish();
                         } else {
-                            isUserVeterinarian = false;
-
                             System.out.println("no es veterinario");
+                            System.out.println("Nos fuimos a mis mascotas");
+                            startActivity(new Intent(this, MisMascotas.class));
+                            finish();
                         }
                     } else {
                         Log.d("Firestore", "El documento no existe");
