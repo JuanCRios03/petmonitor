@@ -68,6 +68,8 @@ dependencies {
     implementation ("com.google.firebase:firebase-core:21.1.1")
     implementation ("com.google.firebase:firebase-bom:32.7.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
+    androidTestImplementation  ("org.mockito:mockito-android:5.12.0")
+    implementation("junit:junit:4.13.2")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
 
