@@ -290,7 +290,7 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
 
 
 
-    private int obtenerHorasDesdeFrecuencia(String frecuencia) {
+    public int obtenerHorasDesdeFrecuencia(String frecuencia) {
         switch (frecuencia) {
             case "Cada 8 horas":
                 return 8;
@@ -302,7 +302,7 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
         }
     }
 
-    private int calcularDuracionDias(String fechaInicio, String fechaFin) {
+    public int calcularDuracionDias(String fechaInicio, String fechaFin) {
         TimeZone tzColombia = TimeZone.getTimeZone("America/Bogota");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         sdf.setTimeZone(tzColombia);
