@@ -15,7 +15,9 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import co.edu.unipiloto.petmonitor.CasosdeUso.MenuVeterinario;
 import co.edu.unipiloto.petmonitor.Menu.MisMascotas;
 import co.edu.unipiloto.petmonitor.R;
 import co.edu.unipiloto.petmonitor.Register.RegisterPaso1Activity;
@@ -25,6 +27,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etGmail, etPassword;
     private Button btnLogin, btnBack;
     private FirebaseAuth auth;
+    private String userID;
+    private FirebaseFirestore db;
+    private boolean isUserVeterinarian;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         final boolean[] isPasswordVisible = {false};
 
         etPassword.setOnTouchListener((v, event) -> {
@@ -89,8 +95,16 @@ public class LoginActivity extends AppCompatActivity {
                         if (user != null) {
                             saveUserSession(user.getEmail());
                             showToast("Inicio de sesión exitoso.");
-                            startActivity(new Intent(this, MisMascotas.class));
-                            finish();
+                            userID = auth.getCurrentUser().getUid();
+                            checkIfUserIsVeterinarian();
+                            if (isUserVeterinarian) {
+                                startActivity(new Intent(this, MenuVeterinario.class));
+                                finish();
+                            } else {
+                                startActivity(new Intent(this, MisMascotas.class));
+                                finish();
+                            }
+
                         }
                     } else {
                         Log.e("LoginError", "Error: ", task.getException());
@@ -123,6 +137,32 @@ public class LoginActivity extends AppCompatActivity {
         editText.setSelection(selection);
 
         editText.setTypeface(ResourcesCompat.getFont(this, R.font.titulos));
+    }
+
+    private void checkIfUserIsVeterinarian() {
+        db.collection("usuarios").document(userID).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Boolean esVeterinario = documentSnapshot.getBoolean("esVeterinario");
+                        if (esVeterinario != null && esVeterinario) {
+                            isUserVeterinarian = true;
+                            System.out.println("es veterinario");
+                            Intent intent = new Intent(this, MenuVeterinario.class);
+                            intent.putExtra("isUserVeterinarian", isUserVeterinarian);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            isUserVeterinarian = false;
+
+                            System.out.println("no es veterinario");
+                        }
+                    } else {
+                        Log.d("Firestore", "El documento no existe");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firestore", "Error al obtener el documento", e);
+                });
     }
 }
 

@@ -60,4 +60,13 @@ public class MenuVeterinario extends AppCompatActivity {
         });
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                .edit()
+                .putString("lastActivity", "MenuVeterinario")
+                .apply();
+    }
 }

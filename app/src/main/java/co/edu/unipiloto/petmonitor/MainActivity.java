@@ -3,6 +3,7 @@ package co.edu.unipiloto.petmonitor;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import co.edu.unipiloto.petmonitor.CasosdeUso.MenuVeterinario;
 import co.edu.unipiloto.petmonitor.Login.LoginActivity;
 import co.edu.unipiloto.petmonitor.Menu.MisMascotas;
 import co.edu.unipiloto.petmonitor.Menu.menuActivity;
@@ -18,13 +21,14 @@ import co.edu.unipiloto.petmonitor.Register.RegisterPaso1Activity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnIniciarSesion, btnRegistrarme;
+    private Button btnIniciarSesion, btnRegistrarme;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
         if (currentUser != null) {
             // El usuario ya está autenticado, revisar la última actividad
@@ -34,11 +38,17 @@ public class MainActivity extends AppCompatActivity {
             Intent intent;
 
             switch (lastActivity) {
+                case "MisClientes":
+                    intent = new Intent(this, MisMascotas.class);
+                    break;
                 case "MisMascotas":
                     intent = new Intent(this, MisMascotas.class);
                     break;
                 case "menuActivity":
                     intent = new Intent(this, menuActivity.class);
+                    break;
+                case "MenuVeterinario":
+                    intent = new Intent(this, MenuVeterinario.class);
                     break;
                 // Agrega más pantallas si deseas que puedan ser restauradas
                 default:
@@ -71,5 +81,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
 

@@ -40,8 +40,6 @@ public class MisMascotas extends AppCompatActivity {
         setContentView(R.layout.activity_mis_mascotas);
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
-        userID = auth.getCurrentUser().getUid();
-        checkIfUserIsVeterinarian();
         layoutMascotas = findViewById(R.id.layoutMascotas);
 
         ImageButton btnAgregar = findViewById(R.id.btnAgregarMascota);
@@ -83,33 +81,6 @@ public class MisMascotas extends AppCompatActivity {
                                     }
                                 });
                     }
-                });
-    }
-
-
-    private void checkIfUserIsVeterinarian() {
-        db.collection("usuarios").document(userID).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        Boolean esVeterinario = documentSnapshot.getBoolean("esVeterinario");
-                        if (esVeterinario != null && esVeterinario) {
-                            isUserVeterinarian = true;
-                            System.out.println("es veterinario");
-                            Intent intent = new Intent(this, MenuVeterinario.class);
-                            intent.putExtra("isUserVeterinarian", isUserVeterinarian);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            isUserVeterinarian = false;
-
-                            System.out.println("no es veterinario");
-                        }
-                    } else {
-                        Log.d("Firestore", "El documento no existe");
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("Firestore", "Error al obtener el documento", e);
                 });
     }
 
