@@ -40,15 +40,15 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_edittext"
-            android:inputType="textPassword"
-            android:hint="contraseña"
             android:drawableEnd="@drawable/ic_eye_closed"
             android:fontFamily="@font/titulos"
+            android:hint="contraseña"
+            android:inputType="textPassword"
             android:paddingHorizontal="16dp"
-            android:layout_marginBottom="16dp"
-            android:textColorHint="@color/grayHint"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textColorHint="@color/grayHint" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,6 +74,14 @@
             android:layout_marginBottom="16dp"
             android:textColorHint="@color/grayHint"
             android:textColor="#000000" />
+
+        <CheckBox
+            android:id="@+id/isTheUserVet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eres veterinario?"
+            android:textSize="20sp"
+            android:fontFamily="@font/titulos"/>
 
         <Button
             android:id="@+id/btnFinalizarRegistro"

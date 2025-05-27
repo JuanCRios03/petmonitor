@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/btnAddImage"
+            android:layout_width="match_parent"
+            android:layout_height="308dp"
+            android:layout_marginBottom="34dp"
+            android:background="#5FFFC1"
+            android:foreground="?attr/selectableItemBackground">
+
+            <!-- TextView centrado vertical y horizontalmente -->
+            <TextView
+                android:layout_width="241dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/titulos"
+                android:gravity="center"
+                android:text="+ Agrega tu Imagen"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnEditarPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_button_yellow"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:text="Editar Perfil"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp" />
+
+
+            <ImageView
+                android:id="@+id/ic_editar_perfil"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/editar_perfil"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/btnRegisterVaccines"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_button_gray"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:text="Registrar Vacunas"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_toStartOf="@+id/iconjeringa"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/iconjeringa"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/jeringa"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/btnHistorialVaccines"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_button_gray"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:text="Historial de Vacunas"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_toStartOf="@+id/iconjeringa2"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/iconjeringa2"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/jeringa"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnRegistrarTratamiento"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_button_green"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:text="Medicación y Tratamientos"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/medicamentos"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnHistorialTratamiento"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_button_green"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:text="Historial de Tratamientos"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_toStartOf="@+id/medicamentos"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/medicamentos"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/medicamentos"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/btnSaludMascota"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_button_green"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:text="Salud de la Mascota"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_toStartOf="@+id/salud"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/salud"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/medicamentos"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnlogout"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_button_red"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:clipToOutline="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titulos"
+                android:text="Cerrar Sesión"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/logout"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/logout"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

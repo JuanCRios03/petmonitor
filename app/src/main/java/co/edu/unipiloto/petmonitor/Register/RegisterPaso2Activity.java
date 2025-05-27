@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,7 +23,8 @@ public class RegisterPaso2Activity extends AppCompatActivity {
 
     EditText etPassword, etConfirmPassword;
     Button btnFinalizarRegistro;
-
+    CheckBox isTheUserVetCheckBox;
+    boolean isTheUserVet;
     FirebaseAuth auth;
     FirebaseFirestore db;
 
@@ -36,6 +38,9 @@ public class RegisterPaso2Activity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnFinalizarRegistro = findViewById(R.id.btnFinalizarRegistro);
+        isTheUserVetCheckBox = findViewById(R.id.isTheUserVet);
+        isTheUserVet = false;
+
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -92,6 +97,7 @@ public class RegisterPaso2Activity extends AppCompatActivity {
                             usuario.put("nombre", nombre);
                             usuario.put("apellido", apellido);
                             usuario.put("email", email);
+                            usuario.put("esVeterinario", isTheUserVet);
 
                             db.collection("usuarios")
                                     .document(uid)
@@ -106,6 +112,14 @@ public class RegisterPaso2Activity extends AppCompatActivity {
                             Toast.makeText(this, "Error al registrar usuario: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
+        });
+
+        isTheUserVetCheckBox.setOnClickListener((v) -> {
+            isTheUserVet = !isTheUserVet;
+            if(isTheUserVet)
+                Toast.makeText(this, "El usuario es veterinario", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(this, "El usuario no es veterinario", Toast.LENGTH_LONG).show();
         });
     }
 

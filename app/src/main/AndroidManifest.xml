@@ -25,9 +25,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".CasosdeUso.MenuVeterinario"
+            android:exported="false" />
+        <activity
             android:name=".Tests.ReporteActividadTester"
             android:exported="false" />
-
         <activity
             android:name=".CasosdeUso.reporteActividad"
             android:exported="false" />
@@ -73,6 +75,7 @@
         <activity android:name=".CasosdeUso.RegistrarTratamientoActivity" />
         <activity android:name=".CasosdeUso.HistorialTratamientosActivity" />
         <activity android:name=".CasosdeUso.HistorialCumplimientosActivity" />
+
         <receiver android:name=".CasosdeUso.RecordatorioReceiver" />
         <receiver android:name=".CasosdeUso.CumplimientoReceiver" />
 
@@ -84,30 +87,25 @@
             android:exported="false" />
         <activity
             android:name=".Tests.TesterMonitoreoActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Tests.ubicacionTiempoRealTestActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Tests.historialUbicacionTestActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Tests.zonaSeguraTestActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Tests.VeterinariosTestActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Tests.RegistrarVacunaTestActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Tests.RegistrarTratamientoTestActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -117,7 +115,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <provider
             android:name="androidx.core.content.FileProvider"

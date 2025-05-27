@@ -41,6 +41,7 @@ public class menuActivity extends AppCompatActivity {
         private FirebaseFirestore db;
         private String currentUserEmail;
         private String mascotaId; // ← Se agrega para recibirlo por intent
+        private boolean isUserVeterinarian;
 
         private RelativeLayout btnEditarPerfil, btnRegisterSafeZone, btnNearbyClinics, btnRealTimeLocation, btnLocationHistory, btnActivityReport, btnExerciseMonitoring, btnRegisterVaccines, btnHistorialVaccines, btnlogout, btnRegistrarTratamiento, btnHistorialTratamiento, btnSaludMascota,btnSaludHistoriaMascota;
 

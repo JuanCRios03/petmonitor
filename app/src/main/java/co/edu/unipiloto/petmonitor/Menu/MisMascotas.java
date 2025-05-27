@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -20,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 import java.util.Map;
 
+import co.edu.unipiloto.petmonitor.CasosdeUso.MenuVeterinario;
+import co.edu.unipiloto.petmonitor.CasosdeUso.editarPerfilActivity;
 import co.edu.unipiloto.petmonitor.R;
 
 public class MisMascotas extends AppCompatActivity {
@@ -28,14 +31,17 @@ public class MisMascotas extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
+    private boolean isUserVeterinarian;
+    private String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_mascotas);
-
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
-
+        userID = auth.getCurrentUser().getUid();
+        checkIfUserIsVeterinarian();
         layoutMascotas = findViewById(R.id.layoutMascotas);
 
         ImageButton btnAgregar = findViewById(R.id.btnAgregarMascota);
@@ -77,6 +83,33 @@ public class MisMascotas extends AppCompatActivity {
                                     }
                                 });
                     }
+                });
+    }
+
+
+    private void checkIfUserIsVeterinarian() {
+        db.collection("usuarios").document(userID).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Boolean esVeterinario = documentSnapshot.getBoolean("esVeterinario");
+                        if (esVeterinario != null && esVeterinario) {
+                            isUserVeterinarian = true;
+                            System.out.println("es veterinario");
+                            Intent intent = new Intent(this, MenuVeterinario.class);
+                            intent.putExtra("isUserVeterinarian", isUserVeterinarian);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            isUserVeterinarian = false;
+
+                            System.out.println("no es veterinario");
+                        }
+                    } else {
+                        Log.d("Firestore", "El documento no existe");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firestore", "Error al obtener el documento", e);
                 });
     }
 
