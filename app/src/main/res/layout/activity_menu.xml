@@ -260,40 +260,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/btnRegisterVaccines"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@drawable/rounded_button_gray"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:clipToOutline="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/titulos"
-                android:text="Registrar Vacunas"
-                android:textSize="24sp"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="24dp"
-                android:layout_toStartOf="@+id/iconjeringa"
-                android:layout_marginEnd="16dp"/>
-
-            <ImageView
-                android:id="@+id/iconjeringa"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:src="@drawable/jeringa"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="24dp"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
             android:id="@+id/btnHistorialVaccines"
             android:layout_width="match_parent"
             android:layout_height="90dp"
@@ -320,38 +286,6 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:src="@drawable/jeringa"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="24dp"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/btnRegistrarTratamiento"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@drawable/rounded_button_green"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:clipToOutline="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/titulos"
-                android:text="Medicación y Tratamientos"
-                android:textSize="24sp"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="24dp"
-                android:layout_toStartOf="@+id/medicamentos"
-                android:layout_marginEnd="16dp"/>
-
-            <ImageView
-                android:id="@+id/medicamentos"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:src="@drawable/medicamentos"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="24dp"
                 android:layout_centerVertical="true"/>

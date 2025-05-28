@@ -25,13 +25,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".CasosdeUso.AgregarCliente"
+            android:name=".RolVeterinario.AgregarCliente"
             android:exported="false" />
         <activity
-            android:name=".CasosdeUso.MisClientes"
+            android:name=".RolVeterinario.MisClientes"
             android:exported="false" />
         <activity
-            android:name=".CasosdeUso.MenuVeterinario"
+            android:name=".RolVeterinario.MenuVeterinario"
             android:exported="false" />
         <activity
             android:name=".Tests.ReporteActividadTester"
@@ -59,9 +59,6 @@
             android:exported="false" />
         <activity
             android:name=".CasosdeUso.PetHealthProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CasosdeUso.HistorialSaludActivity"
             android:exported="false" />
 
         <meta-data

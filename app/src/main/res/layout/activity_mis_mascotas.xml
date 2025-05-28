@@ -24,7 +24,7 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tituloMascotas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -60,8 +60,3 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-

@@ -3,7 +3,6 @@ package co.edu.unipiloto.petmonitor;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,10 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import co.edu.unipiloto.petmonitor.CasosdeUso.MenuVeterinario;
-import co.edu.unipiloto.petmonitor.CasosdeUso.MisClientes;
+import co.edu.unipiloto.petmonitor.RolVeterinario.MenuVeterinario;
+import co.edu.unipiloto.petmonitor.RolVeterinario.MisClientes;
 import co.edu.unipiloto.petmonitor.Login.LoginActivity;
 import co.edu.unipiloto.petmonitor.Menu.MisMascotas;
 import co.edu.unipiloto.petmonitor.Menu.menuActivity;
@@ -55,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     intent = new Intent(this, MisMascotas.class);
                     break;
+
+
             }
 
             startActivity(intent);

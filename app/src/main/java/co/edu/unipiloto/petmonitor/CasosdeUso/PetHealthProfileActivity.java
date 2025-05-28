@@ -1,6 +1,7 @@
 package co.edu.unipiloto.petmonitor.CasosdeUso;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -40,11 +41,19 @@ public class PetHealthProfileActivity extends AppCompatActivity {
     private String userId;
     private String userEmail;
 
+    // Variables para veterinario
+    private boolean esVeterinario = false;
+    private boolean esVeterinarioViendoCliente = false;
+    private String clienteId;
+    private String clienteEmail;
+    private String nombreCliente;
+    private String mascotaIdFromIntent;
+
     // UI Elements
     private TextView weightValueTextView;
     private TextView ageValueTextView;
-    private TextView diseasesValueTextView;  // Nuevo TextView para enfermedades
-    private TextView allergiesValueTextView;  // Nuevo TextView para alergias
+    private TextView diseasesValueTextView;
+    private TextView allergiesValueTextView;
     private ImageView weightImageView;
     private ImageView ageImageView;
     private ImageView diseasesImageView;
@@ -65,18 +74,45 @@ public class PetHealthProfileActivity extends AppCompatActivity {
         // Inicializar Firestore
         db = FirebaseFirestore.getInstance();
 
-        // Obtener el email desde SharedPreferences como en zonaSeguraActivity
-        userEmail = getEmailFromPreferences();
-        if (userEmail == null || userEmail.isEmpty()) {
-            Toast.makeText(this, "No se pudo obtener el correo del usuario.", Toast.LENGTH_LONG).show();
-            finish();
-            return;
+        // Obtener datos del Intent
+        Intent intent = getIntent();
+        esVeterinario = intent.getBooleanExtra("esVeterinario", false);
+        esVeterinarioViendoCliente = intent.getBooleanExtra("esVeterinarioViendoCliente", false);
+        clienteId = intent.getStringExtra("clienteId");
+        clienteEmail = intent.getStringExtra("clienteEmail");
+        nombreCliente = intent.getStringExtra("nombreCliente");
+        mascotaIdFromIntent = intent.getStringExtra("mascotaId");
+
+        Log.d(TAG, "Datos recibidos - esVeterinario: " + esVeterinario +
+                ", esVeterinarioViendoCliente: " + esVeterinarioViendoCliente +
+                ", clienteId: " + clienteId +
+                ", mascotaId: " + mascotaIdFromIntent);
+
+        if (esVeterinarioViendoCliente && clienteId != null && mascotaIdFromIntent != null) {
+            // Veterinario viendo cliente específico
+            userId = clienteId;
+            petId = mascotaIdFromIntent;
+            userEmail = clienteEmail != null ? clienteEmail : "";
+
+            Log.d(TAG, "Modo veterinario - userId: " + userId + ", petId: " + petId);
+            Toast.makeText(this, "Cargando perfil de salud de " + nombreCliente, Toast.LENGTH_SHORT).show();
+
+            // Continuar con la inicialización
+            initViews();
+            setupListeners();
+            loadPetHealthData();
+        } else {
+            // Usuario normal o veterinario sin cliente específico
+            userEmail = getEmailFromPreferences();
+            if (userEmail == null || userEmail.isEmpty()) {
+                Toast.makeText(this, "No se pudo obtener el correo del usuario.", Toast.LENGTH_LONG).show();
+                finish();
+                return;
+            }
+
+            Toast.makeText(this, "Buscando usuario con email: " + userEmail, Toast.LENGTH_SHORT).show();
+            buscarUsuarioYMascota(userEmail);
         }
-
-        Toast.makeText(this, "Buscando usuario con email: " + userEmail, Toast.LENGTH_SHORT).show();
-
-        // Buscar el ID del usuario y de la mascota con el email
-        buscarUsuarioYMascota(userEmail);
     }
 
     private String getEmailFromPreferences() {
@@ -143,8 +179,8 @@ public class PetHealthProfileActivity extends AppCompatActivity {
     private void initViews() {
         weightValueTextView = findViewById(R.id.weightValueTextView);
         ageValueTextView = findViewById(R.id.ageValueTextView);
-        diseasesValueTextView = findViewById(R.id.diseasesValueTextView);  // Inicializar el nuevo TextView
-        allergiesValueTextView = findViewById(R.id.allergiesValueTextView);  // Inicializar el nuevo TextView
+        diseasesValueTextView = findViewById(R.id.diseasesValueTextView);
+        allergiesValueTextView = findViewById(R.id.allergiesValueTextView);
         weightImageView = findViewById(R.id.weightImageView);
         ageImageView = findViewById(R.id.ageImageView);
         diseasesImageView = findViewById(R.id.diseasesImageView);
@@ -206,10 +242,14 @@ public class PetHealthProfileActivity extends AppCompatActivity {
     }
 
     private void loadPetHealthData() {
-        Log.d(TAG, "Cargando datos de salud para mascota: " + petId);
-        Toast.makeText(this, "Cargando datos de salud para mascota: " + petId, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "Cargando datos de salud para mascota: " + petId + " del usuario: " + userId);
 
-        // Referencia directa a la subcoleción salud de la mascota (siguiendo estructura de zonaSeguraActivity)
+        String mensaje = esVeterinarioViendoCliente ?
+                "Cargando datos de salud de " + nombreCliente :
+                "Cargando datos de salud para mascota: " + petId;
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+
+        // Referencia directa a la subcoleción salud de la mascota
         DocumentReference healthRef = db.collection("usuarios").document(userId)
                 .collection("mascotas").document(petId)
                 .collection("salud").document("perfil");
@@ -234,13 +274,11 @@ public class PetHealthProfileActivity extends AppCompatActivity {
 
                     if (documentSnapshot.contains("enfermedades")) {
                         diseases = (List<String>) documentSnapshot.get("enfermedades");
-                        // Actualizar TextView con la lista de enfermedades
                         updateDiseasesTextView();
                     }
 
                     if (documentSnapshot.contains("alergias")) {
                         allergies = (List<String>) documentSnapshot.get("alergias");
-                        // Actualizar TextView con la lista de alergias
                         updateAllergiesTextView();
                     }
                 } else {
@@ -318,9 +356,12 @@ public class PetHealthProfileActivity extends AppCompatActivity {
                                 Log.d(TAG, "Edad encontrada: " + age);
                             } else {
                                 Log.d(TAG, "No se encontró campo 'edad' en el documento");
-                                Toast.makeText(PetHealthProfileActivity.this,
-                                        "No se encontró campo 'edad' en el documento",
-                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                            if (documentSnapshot.contains("peso")) {
+                                weight = documentSnapshot.getString("peso");
+                                weightValueTextView.setText(weight);
+                                Log.d(TAG, "Peso encontrado: " + weight);
                             }
                         } else {
                             Log.d(TAG, "Documento de mascota no encontrado con ID: " + petId);
@@ -355,6 +396,14 @@ public class PetHealthProfileActivity extends AppCompatActivity {
         healthData.put("enfermedades", diseases);
         healthData.put("alergias", allergies);
 
+        // Agregar información del veterinario si aplica
+        if (esVeterinarioViendoCliente) {
+            healthData.put("ultimaModificacionPorVeterinario", true);
+            healthData.put("fechaUltimaModificacion", System.currentTimeMillis());
+        }
+
+        Log.d(TAG, "Guardando datos de salud - userId: " + userId + ", petId: " + petId);
+
         // Guardar en Firestore, siguiendo la estructura correcta
         db.collection("usuarios").document(userId)
                 .collection("mascotas").document(petId)
@@ -364,11 +413,12 @@ public class PetHealthProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "Perfil de salud actualizado correctamente");
-                        Toast.makeText(PetHealthProfileActivity.this,
-                                "Perfil de salud actualizado correctamente",
-                                Toast.LENGTH_SHORT).show();
+                        String mensaje = esVeterinarioViendoCliente ?
+                                "Perfil de salud de " + nombreCliente + " actualizado correctamente" :
+                                "Perfil de salud actualizado correctamente";
+                        Toast.makeText(PetHealthProfileActivity.this, mensaje, Toast.LENGTH_SHORT).show();
 
-                        // También actualizar la edad en el documento principal de la mascota
+                        // También actualizar la edad y peso en el documento principal de la mascota
                         updateAgeInMainDocument();
                     }
                 })
@@ -387,7 +437,7 @@ public class PetHealthProfileActivity extends AppCompatActivity {
         // Actualizar la edad y el peso en el documento principal de la mascota
         Map<String, Object> updateData = new HashMap<>();
         updateData.put("edad", age);
-        updateData.put("peso", weight);  // Añadir actualización del peso
+        updateData.put("peso", weight);
 
         db.collection("usuarios").document(userId)
                 .collection("mascotas").document(petId)
@@ -453,9 +503,6 @@ public class PetHealthProfileActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_list_edit, null);
         builder.setView(dialogView);
-
-        // En una implementación real, aquí se configuraría un RecyclerView o ListView
-        // para mostrar y editar las enfermedades
 
         // Por simplicidad, usaremos un solo EditText donde se ingresan separadas por comas
         EditText editText = dialogView.findViewById(R.id.editTextItem);

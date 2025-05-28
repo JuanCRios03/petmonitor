@@ -107,24 +107,9 @@ public class menuActivity extends AppCompatActivity {
                         startActivity(intent);
                 });
 
-                btnRegisterVaccines = findViewById(R.id.btnRegisterVaccines);
-                btnRegisterVaccines.setOnClickListener(v -> {
-                        Intent intent = new Intent(menuActivity.this, RegistrarVacunaActivity.class);
-                        intent.putExtra("mascotaId", mascotaId);
-                        startActivity(intent);
-                });
-
                 btnHistorialVaccines = findViewById(R.id.btnHistorialVaccines);
                 btnHistorialVaccines.setOnClickListener(v -> {
                         Intent intent = new Intent(menuActivity.this, HistorialVacunasActivity.class);
-                        intent.putExtra("mascotaId", mascotaId);
-                        startActivity(intent);
-                });
-
-
-                btnRegistrarTratamiento = findViewById(R.id.btnRegistrarTratamiento);
-                btnRegistrarTratamiento.setOnClickListener(v -> {
-                        Intent intent = new Intent(menuActivity.this, RegistrarTratamientoActivity.class);
                         intent.putExtra("mascotaId", mascotaId);
                         startActivity(intent);
                 });

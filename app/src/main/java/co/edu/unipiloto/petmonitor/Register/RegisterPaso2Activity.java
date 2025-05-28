@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import co.edu.unipiloto.petmonitor.R;
+import co.edu.unipiloto.petmonitor.RolVeterinario.MenuVeterinario;
+import co.edu.unipiloto.petmonitor.RolVeterinario.MisClientes;
 
 public class RegisterPaso2Activity extends AppCompatActivity {
 
@@ -40,7 +42,6 @@ public class RegisterPaso2Activity extends AppCompatActivity {
         btnFinalizarRegistro = findViewById(R.id.btnFinalizarRegistro);
         isTheUserVetCheckBox = findViewById(R.id.isTheUserVet);
         isTheUserVet = false;
-
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -104,7 +105,15 @@ public class RegisterPaso2Activity extends AppCompatActivity {
                                     .set(usuario)
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(this, RegisterPaso3Activity.class));
+
+                                        // Redirección condicional basada en el rol
+                                        if (isTheUserVet) {
+                                            // Si es veterinario, ir al MisClientes
+                                            startActivity(new Intent(this, MisClientes.class));
+                                        } else {
+                                            // Si no es veterinario, continuar con el paso 3 del registro
+                                            startActivity(new Intent(this, RegisterPaso3Activity.class));
+                                        }
                                         finish();
                                     })
                                     .addOnFailureListener(e -> Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show());
@@ -138,5 +147,3 @@ public class RegisterPaso2Activity extends AppCompatActivity {
         editText.setTypeface(ResourcesCompat.getFont(this, R.font.titulos));
     }
 }
-
-

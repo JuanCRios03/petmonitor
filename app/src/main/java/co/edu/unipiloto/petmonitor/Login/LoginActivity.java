@@ -17,8 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import co.edu.unipiloto.petmonitor.CasosdeUso.MenuVeterinario;
-import co.edu.unipiloto.petmonitor.CasosdeUso.MisClientes;
+import co.edu.unipiloto.petmonitor.RolVeterinario.MisClientes;
 import co.edu.unipiloto.petmonitor.Menu.MisMascotas;
 import co.edu.unipiloto.petmonitor.R;
 import co.edu.unipiloto.petmonitor.Register.RegisterPaso1Activity;

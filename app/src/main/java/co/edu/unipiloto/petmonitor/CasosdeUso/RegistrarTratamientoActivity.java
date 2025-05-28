@@ -54,6 +54,14 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
     private String mascotaSeleccionadaId;
     private int mascotaSeleccionadaPosicion = -1;
 
+    // Variables para rol veterinario
+    private boolean esVeterinario = false;
+    private boolean esVeterinarioViendoCliente = false;
+    private String clienteId;
+    private String clienteEmail;
+    private String nombreCliente;
+    private String mascotaIdEspecifica; // Para cuando viene de MenuVeterinario con mascota específica
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,29 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        // Obtener datos del Intent
+        Intent intent = getIntent();
+        esVeterinario = intent.getBooleanExtra("esVeterinario", false);
+        esVeterinarioViendoCliente = intent.getBooleanExtra("esVeterinarioViendoCliente", false);
+        clienteId = intent.getStringExtra("clienteId");
+        clienteEmail = intent.getStringExtra("clienteEmail");
+        nombreCliente = intent.getStringExtra("nombreCliente");
+        mascotaIdEspecifica = intent.getStringExtra("mascotaId");
+
+        Log.d("RegistrarTratamiento", "esVeterinario: " + esVeterinario);
+        Log.d("RegistrarTratamiento", "esVeterinarioViendoCliente: " + esVeterinarioViendoCliente);
+        Log.d("RegistrarTratamiento", "clienteId: " + clienteId);
+        Log.d("RegistrarTratamiento", "mascotaIdEspecifica: " + mascotaIdEspecifica);
+
+        initializeViews();
+        setupSpinners();
+        setupDateTimePickers();
+        setupButtons();
+
+        cargarUsuario();
+    }
+
+    private void initializeViews() {
         medicamento = findViewById(R.id.medicamento);
         descripcion = findViewById(R.id.descripcion);
         hora = findViewById(R.id.hora);
@@ -70,7 +101,11 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
         frecuenciaSpinner = findViewById(R.id.frecuenciaSpinner);
         mascotaSpinner = findViewById(R.id.mascotaSpinner);
         btnGuardarTratamiento = findViewById(R.id.btnGuardarTratamiento);
+        btnVolver = findViewById(R.id.btnVolver);
+    }
 
+    private void setupSpinners() {
+        // Configurar spinner de frecuencia
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.frecuencias_array,
@@ -79,21 +114,15 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frecuenciaSpinner.setAdapter(adapter);
 
-        // Mostrar calendario
-        fechaInicio.setOnClickListener(v -> mostrarDatePickerDialog(fechaInicio));
-        fechaFin.setOnClickListener(v -> mostrarDatePickerDialog(fechaFin));
-
-        // Mostrar reloj
-        hora.setOnClickListener(v -> mostrarTimePickerDialog(hora));
-        btnVolver = findViewById(R.id.btnVolver);
-        btnVolver.setOnClickListener(v -> {
-            finish(); // Esto cierra la actividad actual y vuelve a la anterior
-        });
+        // Configurar listener del spinner de mascotas
         mascotaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mascotaSeleccionadaId = mascotaIds.get(position);
-                mascotaSeleccionadaPosicion = position;
+                if (position < mascotaIds.size()) {
+                    mascotaSeleccionadaId = mascotaIds.get(position);
+                    mascotaSeleccionadaPosicion = position;
+                    Log.d("RegistrarTratamiento", "Mascota seleccionada: " + mascotaSeleccionadaId);
+                }
             }
 
             @Override
@@ -102,10 +131,17 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
                 mascotaSeleccionadaPosicion = -1;
             }
         });
+    }
 
+    private void setupDateTimePickers() {
+        fechaInicio.setOnClickListener(v -> mostrarDatePickerDialog(fechaInicio));
+        fechaFin.setOnClickListener(v -> mostrarDatePickerDialog(fechaFin));
+        hora.setOnClickListener(v -> mostrarTimePickerDialog(hora));
+    }
+
+    private void setupButtons() {
+        btnVolver.setOnClickListener(v -> finish());
         btnGuardarTratamiento.setOnClickListener(v -> guardarTratamiento());
-
-        cargarUsuario();
     }
 
     private void mostrarDatePickerDialog(EditText campo) {
@@ -140,7 +176,56 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         if (user == null) return;
 
-        userId = user.getUid(); // ID del usuario autenticado
+        if (esVeterinarioViendoCliente && clienteId != null && !clienteId.isEmpty()) {
+            // Veterinario viendo cliente específico - usar clienteId directamente
+            Log.d("RegistrarTratamiento", "Cargando mascotas del cliente: " + clienteId);
+            cargarMascotasDelCliente(clienteId);
+        } else if (esVeterinario && !esVeterinarioViendoCliente) {
+            // Veterinario en modo general - necesitaría lógica adicional si es necesario
+            userId = user.getUid();
+            cargarMascotasDelUsuario(userId);
+        } else {
+            // Usuario regular
+            userId = user.getUid();
+            cargarMascotasDelUsuario(userId);
+        }
+    }
+
+    private void cargarMascotasDelCliente(String clienteId) {
+        db.collection("usuarios")
+                .document(clienteId)
+                .collection("mascotas")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    mascotaNombres.clear();
+                    mascotaIds.clear();
+
+                    for (QueryDocumentSnapshot mascotaDoc : queryDocumentSnapshots) {
+                        String nombre = mascotaDoc.getString("nombreMascota");
+                        String id = mascotaDoc.getId();
+
+                        if (nombre != null) {
+                            mascotaNombres.add(nombre);
+                            mascotaIds.add(id);
+                            Log.d("RegistrarTratamiento", "Mascota cargada: " + nombre + " (" + id + ")");
+                        }
+                    }
+
+                    // CORRECCIÓN: Primero cargar las mascotas al spinner
+                    cargarMascotas(mascotaNombres);
+
+                    // CORRECCIÓN: Después preseleccionar usando post() para asegurar que el spinner esté listo
+                    if (mascotaIdEspecifica != null && !mascotaIdEspecifica.isEmpty()) {
+                        mascotaSpinner.post(() -> preseleccionarMascota(mascotaIdEspecifica));
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al cargar mascotas del cliente", Toast.LENGTH_SHORT).show();
+                    Log.e("RegistrarTratamiento", "Error cargando mascotas del cliente", e);
+                });
+    }
+
+    private void cargarMascotasDelUsuario(String userId) {
         DocumentReference userRef = db.collection("usuarios").document(userId);
 
         userRef.collection("mascotas").get()
@@ -152,15 +237,38 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
                         String nombre = mascotaDoc.getString("nombreMascota");
                         String id = mascotaDoc.getId();
 
-                        mascotaNombres.add(nombre);
-                        mascotaIds.add(id);
+                        if (nombre != null) {
+                            mascotaNombres.add(nombre);
+                            mascotaIds.add(id);
+                        }
                     }
                     cargarMascotas(mascotaNombres);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error al cargar mascotas", Toast.LENGTH_SHORT).show();
-                    Log.e("Firestore", "Error cargando mascotas", e);
+                    Log.e("RegistrarTratamiento", "Error cargando mascotas", e);
                 });
+    }
+
+    private void preseleccionarMascota(String mascotaId) {
+        Log.d("RegistrarTratamiento", "Intentando preseleccionar mascota: " + mascotaId);
+        Log.d("RegistrarTratamiento", "Mascotas disponibles: " + mascotaIds.toString());
+
+        for (int i = 0; i < mascotaIds.size(); i++) {
+            if (mascotaIds.get(i).equals(mascotaId)) {
+                mascotaSpinner.setSelection(i);
+                mascotaSeleccionadaId = mascotaId;
+                mascotaSeleccionadaPosicion = i;
+                Log.d("RegistrarTratamiento", "Mascota preseleccionada en posición: " + i + " con ID: " + mascotaId);
+
+                // CORRECCIÓN: Forzar la actualización del listener
+                if (mascotaSpinner.getOnItemSelectedListener() != null) {
+                    mascotaSpinner.getOnItemSelectedListener().onItemSelected(mascotaSpinner, null, i, 0);
+                }
+                return;
+            }
+        }
+        Log.w("RegistrarTratamiento", "No se pudo encontrar la mascota con ID: " + mascotaId);
     }
 
     private void cargarMascotas(List<String> nombres) {
@@ -168,6 +276,8 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, nombres);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mascotaSpinner.setAdapter(adapter);
+
+        Log.d("RegistrarTratamiento", "Spinner configurado con " + nombres.size() + " mascotas");
     }
 
     private void guardarTratamiento() {
@@ -178,9 +288,20 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
         String inicio = fechaInicio.getText().toString().trim();
         String fin = fechaFin.getText().toString().trim();
 
-        if (mascotaSeleccionadaId == null) {
-            Toast.makeText(this, "Selecciona una mascota", Toast.LENGTH_SHORT).show();
-            return;
+        // CORRECCIÓN: Validación mejorada para mascota
+        Log.d("RegistrarTratamiento", "Validando mascota - ID: " + mascotaSeleccionadaId + ", Posición: " + mascotaSeleccionadaPosicion);
+
+        if (mascotaSeleccionadaId == null || mascotaSeleccionadaId.isEmpty()) {
+            // CORRECCIÓN: Intentar obtener la mascota del spinner actual si no está asignada
+            int posicionActual = mascotaSpinner.getSelectedItemPosition();
+            if (posicionActual >= 0 && posicionActual < mascotaIds.size()) {
+                mascotaSeleccionadaId = mascotaIds.get(posicionActual);
+                mascotaSeleccionadaPosicion = posicionActual;
+                Log.d("RegistrarTratamiento", "Mascota obtenida del spinner - ID: " + mascotaSeleccionadaId);
+            } else {
+                Toast.makeText(this, "Selecciona una mascota", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         if (med.isEmpty() || frec.isEmpty() || horaTxt.isEmpty() || inicio.isEmpty() || fin.isEmpty()) {
@@ -216,25 +337,61 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
         tratamiento.put("timestamp", FieldValue.serverTimestamp());
         tratamiento.put("nombreMascota", nombreMascota);
 
-        db.collection("usuarios").document(userId)
+        // Agregar información del veterinario si es el caso
+        if (esVeterinario) {
+            FirebaseUser currentUser = auth.getCurrentUser();
+            if (currentUser != null) {
+                tratamiento.put("veterinarioId", currentUser.getUid());
+                tratamiento.put("veterinarioEmail", currentUser.getEmail());
+                tratamiento.put("registradoPorVeterinario", true);
+            }
+        }
+
+        // Determinar el userId correcto para guardar
+        String userIdParaGuardar;
+        if (esVeterinarioViendoCliente && clienteId != null && !clienteId.isEmpty()) {
+            userIdParaGuardar = clienteId;
+        } else {
+            userIdParaGuardar = userId;
+        }
+
+        Log.d("RegistrarTratamiento", "Guardando tratamiento en userId: " + userIdParaGuardar);
+        Log.d("RegistrarTratamiento", "MascotaId: " + mascotaSeleccionadaId);
+
+        db.collection("usuarios").document(userIdParaGuardar)
                 .collection("mascotas").document(mascotaSeleccionadaId)
                 .collection("tratamientos")
                 .add(tratamiento)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Tratamiento guardado correctamente", Toast.LENGTH_SHORT).show();
+
                     int frecuenciaHoras = obtenerHorasDesdeFrecuencia(frec);
                     int duracionDias = calcularDuracionDias(inicio, fin);
-
-                    // PASAR el ID del documento creado para usar en la notificación y en el registro de cumplimiento
                     String tratamientoId = documentReference.getId();
 
                     programarRecordatorio(nombreMascota, med, desc, frecuenciaHoras, duracionDias, inicioMillis, tzColombia,
                             mascotaSeleccionadaId, tratamientoId);
 
+                    // Limpiar campos después de guardar exitosamente
+                    limpiarCampos();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error al guardar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("RegistrarTratamiento", "Error al guardar tratamiento", e);
                 });
+    }
+
+    private void limpiarCampos() {
+        medicamento.setText("");
+        descripcion.setText("");
+        hora.setText("");
+        fechaInicio.setText("");
+        fechaFin.setText("");
+        frecuenciaSpinner.setSelection(0);
+        // No resetear mascotaSpinner si hay una preseleccionada
+        if (mascotaIdEspecifica == null || mascotaIdEspecifica.isEmpty()) {
+            mascotaSpinner.setSelection(0);
+        }
     }
 
     private void programarRecordatorio(String nombreMascota, String nombre, String medicamento, int frecuenciaHoras, int duracionDias, long inicioMillis, TimeZone tzColombia,
@@ -287,8 +444,6 @@ public class RegistrarTratamientoActivity extends AppCompatActivity {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
         }
     }
-
-
 
     public int obtenerHorasDesdeFrecuencia(String frecuencia) {
         switch (frecuencia) {
